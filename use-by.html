@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Use By | Fresh'd</title>
+
+  <!-- Shared styling for navigation -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Use By page styling -->
+  <link rel="stylesheet" href="css/use-by.css">
+
+  <!-- Shared inventory: load FIRST -->
+  <script src="js/inventory.js" defer></script>
+
+  <!-- Use By functionality: load SECOND -->
+  <script src="js/use-by.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="sticker-nav" aria-label="Main navigation">
+      <a href="fill-fridge.html"><img src="images/fill-fridge-button.png" alt="Fill Fridge"></a>
+      <a href="fill-pantry.html"><img src="images/fill-pantry-button.png" alt="Fill Pantry"></a>
+      <a href="buy-list.html"><img src="images/buy-list-button.png" alt="Buy List"></a>
+      <a href="index.html" class="brand"><img src="images/freshd-logo.png" alt="Fresh'd Home"></a>
+      <a href="customize.html"><img src="images/customize-button.png" alt="Customize"></a>
+      <a href="use-by.html" aria-current="page"><img src="images/use-by-button.png" alt="Use By"></a>
+      <a href="about.html"><img src="images/about-button.png" alt="About Us"></a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">FRESH'D / YOUR FOOD, YOUR RULES</p>
+        <h1>USE BY<span>.</span></h1>
+      </div>
+
+      <div class="hero-copy">
+        <p class="tagline">GOOD FOOD DESERVES A SECOND CHANCE.</p>
+        <p>Know what to eat first. Track what's fresh, what's expiring, and what needs your attention.</p>
+        <a href="fill-fridge.html" class="add-link">+ ADD GROCERIES ↗</a>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Freshness overview">
+      <div class="stat expired">
+        <p>01 / PAST ITS DATE</p>
+        <strong id="expired-count">0</strong>
+        <span>EXPIRED</span>
+      </div>
+
+      <div class="stat soon">
+        <p>02 / EAT THESE FIRST</p>
+        <strong id="soon-count">0</strong>
+        <span>USE SOON</span>
+      </div>
+
+      <div class="stat fresh">
+        <p>03 / STILL GOOD</p>
+        <strong id="fresh-count">0</strong>
+        <span>FRESH</span>
+      </div>
+
+      <div class="stat undated">
+        <p>04 / CHECK MANUALLY</p>
+        <strong id="undated-count">0</strong>
+        <span>NO EXPIRY DATE</span>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <div class="inventory-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">YOUR FOOD, SORTED</p>
+            <h2>THE FRESHNESS LIST</h2>
+          </div>
+          <span id="total-count">0 ITEMS</span>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter inventory">
+          <button type="button" data-filter="all" class="active" aria-pressed="true">ALL</button>
+          <button type="button" data-filter="expired" aria-pressed="false">EXPIRED</button>
+          <button type="button" data-filter="soon" aria-pressed="false">USE SOON</button>
+          <button type="button" data-filter="fresh" aria-pressed="false">FRESH</button>
+          <button type="button" data-filter="undated" aria-pressed="false">NO EXPIRY</button>
+        </div>
+
+        <div class="search-row">
+          <input id="food-search" type="search" placeholder="SEARCH YOUR FOOD..." aria-label="Search your food">
+
+          <select id="sort-by" aria-label="Sort groceries">
+            <option value="urgent">MOST URGENT FIRST</option>
+            <option value="name">NAME A–Z</option>
+            <option value="date">EXPIRY DATE</option>
+          </select>
+        </div>
+
+        <div id="useby-list" class="food-list" aria-live="polite"></div>
+      </div>
+
+      <aside class="receipt" aria-label="Freshness receipt">
+        <p class="receipt-top">*** FRESH'D ***</p>
+        <h2>FRESHNESS<br>RECEIPT</h2>
+        <p class="receipt-sub">NO FOOD LEFT BEHIND</p>
+
+        <div class="receipt-rule"></div>
+
+        <p class="receipt-line">
+          <span>TOTAL ITEMS</span>
+          <strong id="receipt-total">0</strong>
+        </p>
+
+        <p class="receipt-line">
+          <span>EXPIRED</span>
+          <strong id="receipt-expired">0</strong>
+        </p>
+
+        <p class="receipt-line">
+          <span>USE SOON</span>
+          <strong id="receipt-soon">0</strong>
+        </p>
+
+        <div class="receipt-rule"></div>
+
+        <p class="receipt-line total">
+          <span>NEEDS ATTENTION</span>
+          <strong id="receipt-attention">0</strong>
+        </p>
+
+        <div class="barcode" aria-hidden="true"></div>
+        <p class="receipt-bottom">THANK YOU FOR KEEPING IT FRESH!</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer>FRESH'D © 2026 · YOUR FRIDGE, YOUR RULES.</footer>
+</body>
+</html>

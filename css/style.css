@@ -1,0 +1,1071 @@
+
+/* =========================================
+   FRESH'D — GLOBAL STYLES
+========================================= */
+
+:root {
+  --black: #0b0b0b;
+  --cream: #f5f0e6;
+  --olive: #687b43;
+  --green: #8d9e26;
+  --red: #c63e31;
+  --yellow: #f0c65a;
+  --muted: #aaa69d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--cream);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: var(--yellow);
+  color: var(--black);
+}
+
+/* =========================================
+   SHARED STICKER NAVIGATION
+========================================= */
+
+.site-header {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 18px 40px 12px;
+  position: relative;
+  z-index: 100;
+  background: #080808;
+}
+
+.sticker-nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(4px, 1vw, 16px);
+}
+
+.sticker-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 0;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  transition: transform 0.25s ease;
+}
+
+.sticker-nav a:hover {
+  transform: translateY(-6px) rotate(-3deg);
+}
+
+.sticker-nav a:focus-visible {
+  outline: 2px dashed var(--cream);
+  outline-offset: 5px;
+  border-radius: 8px;
+}
+
+.sticker-nav img {
+  display: block;
+  width: clamp(58px, 8vw, 120px);
+  height: clamp(58px, 8vw, 120px);
+  object-fit: contain;
+}
+
+.sticker-nav a[aria-current="page"] img {
+  filter: drop-shadow(0 4px 0 rgba(255,255,255,0.12));
+}
+
+/* =========================================
+   HOMEPAGE HERO
+========================================= */
+
+.home-hero {
+  min-height: 730px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 75px 7% 105px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 45px;
+  position: relative;
+}
+
+.home-hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.home-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.home-hero h1 {
+  margin: 28px 0;
+  font-size: clamp(75px, 10vw, 155px);
+  font-weight: 900;
+  letter-spacing: -9px;
+  line-height: 0.82;
+}
+
+.home-hero h1 span {
+  color: var(--green);
+}
+
+.home-tagline {
+  font-size: clamp(15px, 1.7vw, 23px);
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.home-description {
+  max-width: 440px;
+  color: #c8c5bd;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.home-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 24px;
+  background: var(--green);
+  border: 2px solid var(--green);
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: transform 0.25s, background 0.25s;
+}
+
+.home-primary-btn:hover {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  transform: translateY(-4px);
+}
+
+.home-secondary-btn {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-bottom: 2px solid var(--cream);
+  padding-bottom: 6px;
+}
+
+.home-secondary-btn:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}
+
+.home-small-note {
+  margin-top: 32px;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 3px;
+}
+
+/* =========================================
+   INTERACTIVE FRIDGE
+========================================= */
+
+.home-fridge-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.home-fridge-button {
+  display: block;
+  width: min(100%, 430px);
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  filter: drop-shadow(0 28px 25px rgba(0,0,0,0.7));
+  transition: transform 0.3s ease;
+}
+
+.home-fridge-button:hover {
+  transform: scale(1.04) rotate(-1deg);
+}
+
+.home-fridge-button:focus-visible {
+  outline: 3px dashed var(--yellow);
+  outline-offset: 8px;
+}
+
+.home-fridge-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 580px;
+  object-fit: contain;
+}
+
+.home-fridge-sticker {
+  position: absolute;
+  top: 4%;
+  right: 0;
+  z-index: 2;
+  width: 115px;
+  height: 115px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--red);
+  color: var(--cream);
+  border: 3px dashed var(--cream);
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.home-fridge-sticker span {
+  font-size: 30px;
+}
+
+.home-fridge-hint {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* =========================================
+   MARQUEE
+========================================= */
+
+.home-marquee {
+  overflow: hidden;
+  background: var(--green);
+  color: var(--black);
+  padding: 19px 0;
+  border-top: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+}
+
+.home-marquee-track {
+  width: max-content;
+  white-space: nowrap;
+  font-size: clamp(18px, 3vw, 32px);
+  font-weight: 900;
+  letter-spacing: 4px;
+  animation: freshdMarquee 22s linear infinite;
+}
+
+@keyframes freshdMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.home-features {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 110px 7%;
+}
+
+.home-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 45px;
+}
+
+.home-section-heading h2,
+.home-stock-copy h2 {
+  margin: 18px 0 0;
+  font-size: clamp(50px, 7vw, 100px);
+  font-weight: 900;
+  letter-spacing: -5px;
+  line-height: 0.9;
+}
+
+.home-section-heading h2 span,
+.home-stock-copy h2 span {
+  color: var(--green);
+}
+
+.home-section-heading > p {
+  max-width: 270px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1.8;
+}
+
+.home-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.home-feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+  padding: 27px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-feature-card:hover {
+  transform: translateY(-10px) rotate(-1deg);
+  box-shadow: 10px 12px 0 rgba(255,255,255,0.1);
+}
+
+.feature-green {
+  background: var(--green);
+  color: #10140b;
+}
+
+.feature-cream {
+  background: #e9dfc8;
+  color: #17140e;
+}
+
+.feature-red {
+  background: #c94d3d;
+  color: #fff5e6;
+}
+
+.feature-dark {
+  background: #292c22;
+  color: #f5f0e6;
+  border-color: #69764b;
+}
+
+.feature-number {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.feature-icon {
+  margin: 25px 0 12px;
+  font-size: 65px;
+}
+
+.home-feature-card h3 {
+  margin: 0 0 20px;
+  font-size: clamp(32px, 3vw, 47px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -2px;
+}
+
+.home-feature-card p {
+  max-width: 230px;
+  margin: 0 0 30px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.feature-arrow {
+  position: absolute;
+  right: 23px;
+  bottom: 18px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/* =========================================
+   STOCK SECTION
+========================================= */
+
+.home-stock-section {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  align-items: center;
+  gap: 70px;
+  padding: 110px max(7%, calc((100% - 1290px) / 2));
+  background: #1a1e15;
+}
+
+.home-stock-copy > p:not(.home-eyebrow) {
+  max-width: 430px;
+  margin: 30px 0;
+  color: #d0d1c7;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* =========================================
+   RECEIPT
+========================================= */
+
+.home-stock-receipt {
+  width: min(100%, 370px);
+  justify-self: center;
+  padding: 35px 30px;
+  background: #f1e7d1;
+  color: #17140e;
+  text-align: center;
+  box-shadow: 12px 12px 0 rgba(0,0,0,0.25);
+  transform: rotate(2deg);
+}
+
+.home-receipt-top {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 4px;
+}
+
+.home-stock-receipt h3 {
+  margin: 25px 0 15px;
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -2px;
+}
+
+.home-receipt-sub {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.home-receipt-rule {
+  border-top: 2px dashed #28231c;
+  margin: 27px 0;
+}
+
+.home-receipt-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin: 17px 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.home-receipt-line strong {
+  font-size: 22px;
+}
+
+.home-receipt-total {
+  font-size: 14px;
+}
+
+.home-barcode {
+  height: 65px;
+  margin: 32px 0 18px;
+  background: repeating-linear-gradient(
+    90deg,
+    #17140e 0px,
+    #17140e 2px,
+    transparent 2px,
+    transparent 5px,
+    #17140e 5px,
+    #17140e 9px,
+    transparent 9px,
+    transparent 12px
+  );
+}
+
+.home-receipt-bottom {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   FINAL CTA
+========================================= */
+
+.home-final-cta {
+  padding: 125px 20px;
+  text-align: center;
+}
+
+.home-final-cta h2 {
+  margin: 20px 0;
+  font-size: clamp(75px, 13vw, 180px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -8px;
+}
+
+.home-final-cta h2 span {
+  color: var(--red);
+}
+
+.home-final-cta > p:not(.home-eyebrow) {
+  margin: 28px 0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.home-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 28px 7%;
+  border-top: 1px solid #393939;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.home-footer a {
+  text-decoration: none;
+}
+
+.home-footer a:hover {
+  color: var(--green);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+  .home-hero {
+    padding: 70px 5%;
+    gap: 20px;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(65px, 9vw, 110px);
+    letter-spacing: -5px;
+  }
+
+  .home-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-feature-card {
+    min-height: 320px;
+  }
+
+  .home-stock-section {
+    padding: 85px 6%;
+    gap: 35px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+  .site-header {
+    padding: 12px;
+  }
+
+  .sticker-nav {
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+
+  .sticker-nav a {
+    flex: 0 0 64px;
+  }
+
+  .sticker-nav img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .home-hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding: 65px 7% 75px;
+    text-align: center;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(65px, 14vw, 110px);
+    letter-spacing: -5px;
+  }
+
+  .home-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .home-hero-actions {
+    justify-content: center;
+  }
+
+  .home-fridge-area {
+    margin-top: 30px;
+  }
+
+  .home-fridge-button {
+    max-width: 310px;
+  }
+
+  .home-fridge-sticker {
+    right: 5%;
+    width: 90px;
+    height: 90px;
+    font-size: 14px;
+  }
+
+  .home-features {
+    padding: 75px 6%;
+  }
+
+  .home-section-heading {
+    display: block;
+  }
+
+  .home-section-heading h2,
+  .home-stock-copy h2 {
+    font-size: clamp(48px, 11vw, 80px);
+    letter-spacing: -3px;
+  }
+
+  .home-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-feature-card {
+    min-height: 290px;
+  }
+
+  .home-stock-section {
+    grid-template-columns: 1fr;
+    padding: 80px 7%;
+    text-align: center;
+  }
+
+  .home-stock-copy > p:not(.home-eyebrow) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .home-stock-receipt {
+    margin-top: 20px;
+  }
+
+  .home-final-cta {
+    padding: 95px 5%;
+  }
+
+  .home-final-cta h2 {
+    font-size: clamp(65px, 15vw, 115px);
+    letter-spacing: -4px;
+  }
+
+  .home-footer {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================
+   FRESH'D — MOBILE RESPONSIVE FIXES
+   Add to the BOTTOM of css/style.css
+========================================= */
+
+/* Prevent horizontal overflow */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+
+  .home-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 60px 6%;
+    gap: 35px;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(60px, 11vw, 100px);
+    letter-spacing: -4px;
+  }
+
+  .home-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .home-hero-actions {
+    justify-content: center;
+  }
+
+  .home-fridge-button {
+    max-width: 350px;
+  }
+
+  .home-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-stock-section {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .home-stock-copy > p:not(.home-eyebrow) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+  /* NAVIGATION */
+  .site-header {
+    padding: 10px 8px;
+  }
+
+  .sticker-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 8px 5px 12px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sticker-nav a {
+    flex: 0 0 65px;
+  }
+
+  .sticker-nav img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+  }
+
+  /* HERO */
+  .home-hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding: 45px 20px 65px;
+    gap: 35px;
+    text-align: center;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(52px, 14vw, 78px);
+    letter-spacing: -3px;
+    line-height: 0.95;
+    overflow-wrap: anywhere;
+  }
+
+  .home-eyebrow {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .home-tagline {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .home-description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .home-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .home-primary-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .home-secondary-btn {
+    align-self: center;
+  }
+
+  /* FRIDGE */
+  .home-fridge-area {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .home-fridge-button {
+    width: 100%;
+    max-width: 270px;
+  }
+
+  .home-fridge-button img {
+    max-height: 400px;
+    object-fit: contain;
+  }
+
+  .home-fridge-sticker {
+    width: 75px;
+    height: 75px;
+    right: 2%;
+    top: 0;
+    font-size: 12px;
+  }
+
+  .home-fridge-sticker span {
+    font-size: 20px;
+  }
+
+  .home-fridge-hint {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  /* MARQUEE */
+  .home-marquee {
+    padding: 12px 0;
+  }
+
+  .home-marquee-track {
+    font-size: 18px;
+  }
+
+  /* FEATURE CARDS */
+  .home-features {
+    padding: 65px 20px;
+  }
+
+  .home-section-heading {
+    display: block;
+    text-align: center;
+  }
+
+  .home-section-heading h2,
+  .home-stock-copy h2 {
+    font-size: clamp(42px, 11vw, 65px);
+    letter-spacing: -2px;
+  }
+
+  .home-section-heading > p {
+    max-width: none;
+    margin-top: 20px;
+  }
+
+  .home-feature-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .home-feature-card {
+    min-height: 280px;
+    padding: 25px;
+  }
+
+  .home-feature-card h3 {
+    font-size: 40px;
+  }
+
+  .feature-icon {
+    font-size: 50px;
+    margin: 15px 0;
+  }
+
+  /* INVENTORY RECEIPT */
+  .home-stock-section {
+    grid-template-columns: 1fr;
+    padding: 65px 20px;
+    gap: 40px;
+  }
+
+  .home-stock-receipt {
+    width: 100%;
+    max-width: 340px;
+    padding: 30px 22px;
+    transform: none;
+  }
+
+  .home-stock-receipt h3 {
+    font-size: 40px;
+  }
+
+  /* FINAL SECTION */
+  .home-final-cta {
+    padding: 75px 20px;
+  }
+
+  .home-final-cta h2 {
+    font-size: clamp(55px, 14vw, 90px);
+    letter-spacing: -3px;
+  }
+
+  /* FOOTER */
+  .home-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 25px 20px;
+    text-align: center;
+  }
+
+}
+
+/* VERY SMALL PHONES */
+@media (max-width: 380px) {
+
+  .home-hero h1 {
+    font-size: 48px;
+  }
+
+  .home-fridge-button {
+    max-width: 230px;
+  }
+
+  .home-feature-card h3 {
+    font-size: 35px;
+  }
+
+  .home-final-cta h2 {
+    font-size: 52px;
+  }
+
+}
+
+/* =========================================
+   FRESH'D — MOBILE NAVIGATION FIX
+   Fit all 7 stickers on one row
+========================================= */
+
+@media (max-width: 600px) {
+
+  .site-header {
+    width: 100%;
+    padding: 10px 5px;
+  }
+
+  .sticker-nav {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: 2px;
+    width: 100%;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .sticker-nav a {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sticker-nav img {
+    width: 100%;
+    max-width: 52px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+  }
+
+  .sticker-nav a:hover {
+    transform: scale(1.08);
+  }
+
+}
+
+/* EXTRA SMALL PHONES */
+@media (max-width: 380px) {
+
+  .sticker-nav {
+    gap: 0;
+  }
+
+  .sticker-nav img {
+    max-width: 44px;
+  }
+
+}

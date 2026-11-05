@@ -1,0 +1,559 @@
+:root{--red:#b31512;--cream:#f5ead8;--ink:#080808;--line:#666;--mono:'Courier New',Courier,monospace}*{box-sizing:border-box}body{margin:0;background:#000;color:#fff;font-family:var(--mono)}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #eeb54e;outline-offset:3px}.site-header{padding:14px 22px 4px}.sticker-nav{max-width:1480px;margin:auto;display:flex;justify-content:space-around;align-items:center;gap:14px}.sticker-nav a{display:block;min-width:0}.sticker-nav img{width:100%;max-width:145px;height:106px;object-fit:contain;transition:transform .2s}.sticker-nav .brand img{max-width:170px}.sticker-nav a:hover img{transform:rotate(-4deg) scale(1.07)}.workspace{max-width:1550px;margin:10px auto 30px;padding:0 22px;display:grid;grid-template-columns:minmax(0,1.13fr) minmax(320px,1fr);gap:20px;align-items:start}.workspace-left{min-width:0}.mode-switch{display:flex;justify-content:center;gap:0;margin:6px 0 20px}.mode-btn{min-width:156px;border:1px solid #eee;background:#fff;color:#000;padding:13px 16px;font-size:12px;font-weight:900}.mode-btn:first-child{border-radius:999px 0 0 999px}.mode-btn:last-child{border-radius:0 999px 999px 0;background:var(--red);color:white;border-color:var(--red)}.mode-btn.is-active{box-shadow:inset 0 0 0 3px rgba(0,0,0,.15)}.mode-btn:not(.is-active){opacity:.7}.panels{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:15px;align-items:start}.receipt{color:#111;padding:30px 22px 24px;min-width:0;background-color:var(--cream);background-image:repeating-linear-gradient(22deg,rgba(105,75,40,.028) 0 2px,transparent 2px 9px);clip-path:polygon(0 1%,2% 0,4% 1%,6% 0,8% 1%,10% 0,12% 1%,14% 0,16% 1%,18% 0,20% 1%,22% 0,24% 1%,26% 0,28% 1%,30% 0,32% 1%,34% 0,36% 1%,38% 0,40% 1%,42% 0,44% 1%,46% 0,48% 1%,50% 0,52% 1%,54% 0,56% 1%,58% 0,60% 1%,62% 0,64% 1%,66% 0,68% 1%,70% 0,72% 1%,74% 0,76% 1%,78% 0,80% 1%,82% 0,84% 1%,86% 0,88% 1%,90% 0,92% 1%,94% 0,96% 1%,98% 0,100% 1%,100% 99%,98% 100%,96% 99%,94% 100%,92% 99%,90% 100%,88% 99%,86% 100%,84% 99%,82% 100%,80% 99%,78% 100%,76% 99%,74% 100%,72% 99%,70% 100%,68% 99%,66% 100%,64% 99%,62% 100%,60% 99%,58% 100%,56% 99%,54% 100%,52% 99%,50% 100%,48% 99%,46% 100%,44% 99%,42% 100%,40% 99%,38% 100%,36% 99%,34% 100%,32% 99%,30% 100%,28% 99%,26% 100%,24% 99%,22% 100%,20% 99%,18% 100%,16% 99%,14% 100%,12% 99%,10% 100%,8% 99%,6% 100%,4% 99%,2% 100%,0 99%)}.receipt h1{text-align:center;font-size:clamp(23px,2.7vw,40px);letter-spacing:-2px;margin:0}.receipt-subtitle{text-align:center;font-weight:bold;font-size:11px}.dash{border-top:1px dashed currentColor;opacity:.65;margin:15px 0 18px}.receipt label{display:block;font-weight:900;font-size:12px;margin:16px 0 6px}.receipt input,.receipt select{width:100%;min-width:0;background:transparent;border:1px solid #8d8170;border-radius:3px;padding:11px 9px;color:#111;font-size:13px}.receipt input[type=file]{font-size:10px;padding:8px 3px}.two-inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field-help{font-size:10px;line-height:1.4}.form-error{font-size:12px;color:#a00;font-weight:bold}.receipt-submit{width:100%;background:#050505;color:white;border:0;border-radius:4px;padding:17px 8px;margin-top:14px;font-size:14px;font-weight:bold}.cancel-edit{background:transparent;border:0;text-decoration:underline;margin:12px auto;display:block}.cancel-edit[hidden]{display:none}.receipt-footer{text-align:center;border-top:1px dashed #555;margin-top:18px;padding-top:17px;font-weight:bold;font-size:10px}.barcode{height:39px;width:72%;margin:12px auto;background:repeating-linear-gradient(90deg,#000 0 3px,transparent 3px 5px,#000 5px 6px,transparent 6px 10px,#000 10px 14px,transparent 14px 17px)}.stock{border:1px solid #777;border-radius:14px;padding:18px 15px 16px;min-width:0}.stock-heading,.fridge-topline{display:flex;align-items:center;justify-content:space-between;gap:10px}.stock h2,.fridge-topline h2{font-size:22px;font-weight:normal;margin:0}.stock-heading span,.fridge-topline span{font-size:12px}.stock .dash{margin:10px 0 14px}.filters{display:flex;gap:5px;flex-wrap:wrap}.filter,.fridge-views button{background:#000;color:white;border:1px solid #777;border-radius:999px;padding:9px 12px;font-size:10px}.filter.is-selected,.fridge-views button.is-selected{background:#fff;color:#000;border-color:#fff}.stock-list{padding:0;margin:15px 0;list-style:none;display:grid;gap:8px}.stock-item{display:grid;grid-template-columns:18px 47px minmax(0,1fr) auto;align-items:center;gap:7px;border:1px solid #666;border-radius:9px;padding:8px 6px;min-height:77px}.stock-item.selected{border-color:var(--red);box-shadow:0 0 0 1px var(--red)}.drag-handle{font-size:20px;opacity:.8;cursor:grab}.food-picture{width:45px;height:48px;object-fit:contain}.food-emoji{font-size:32px;text-align:center}.food-details{min-width:0}.food-name{font-size:12px;font-weight:bold;overflow-wrap:anywhere}.food-meta{font-size:10px;color:#ccc;line-height:1.5}.food-actions{display:flex;flex-direction:column;gap:5px}.food-actions button{background:transparent;color:white;border:1px solid #555;border-radius:4px;font-size:9px;padding:4px}.food-actions .select-food{color:#fff;border-color:#b31512}.empty-state{font-size:12px;line-height:1.5;color:#bbb}.add-another{width:100%;padding:16px 8px;background:transparent;color:white;border:1px dashed #aaa;font-size:12px}.clear-placements{display:block;margin:13px auto 0;background:transparent;color:#aaa;border:0;text-decoration:underline;font-size:10px}.organize-hint{font-size:11px;color:#e8b8b7;line-height:1.5}.fridge-section{min-width:0}.fridge-topline{margin:7px 0 14px}.fridge-views{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}.fridge-stage{position:relative;width:100%;max-width:700px;margin:6px auto;isolation:isolate}.fridge-stage>img{display:block;width:100%;height:auto;object-fit:contain;user-select:none}.shelf-zone{position:absolute;z-index:2;border:1px dashed transparent;border-radius:8px;pointer-events:none}.organizing .shelf-zone{pointer-events:auto;border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.04)}.organizing .shelf-zone.drag-over{background:rgba(179,21,18,.28);border:2px dashed #fff}.placed-foods{position:absolute;inset:0;pointer-events:none;z-index:3}.placed-food{position:absolute;transform:translate(-50%,-50%);width:10%;height:10%;object-fit:contain;filter:drop-shadow(0 2px 3px #333);font-size:clamp(20px,3vw,40px);text-align:center;pointer-events:auto;cursor:pointer}.placed-food img{width:100%;height:100%;object-fit:contain}.placed-food.selected{outline:2px dashed var(--red);border-radius:5px}.fridge-caption{text-align:center;font-size:11px;color:#bbb;line-height:1.6}.shelf-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;font-size:11px}.shelf-actions select,.shelf-actions button{padding:8px;background:#111;color:white;border:1px solid #888;border-radius:5px}.shelf-actions #place-button{background:var(--red);border-color:var(--red)}.workspace.organizing .receipt{display:none}.workspace.organizing .panels{grid-template-columns:1fr}.workspace.organizing .stock{max-width:none}.workspace.organizing .stock-item{grid-template-columns:22px 58px minmax(0,1fr) auto}.workspace.organizing .food-picture{width:55px}.workspace.organizing .food-emoji{font-size:37px}.workspace.organizing .stock-list{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}.workspace.organizing .add-another{display:none}.workspace.organizing .shelf-actions[hidden]{display:none}@media(max-width:1100px){.workspace{grid-template-columns:1fr}.fridge-stage{max-width:600px}.sticker-nav img{height:84px}}@media(max-width:700px){.site-header{padding:9px}.sticker-nav{gap:5px;flex-wrap:wrap}.sticker-nav a{width:22%}.sticker-nav .brand{width:30%}.sticker-nav img{height:64px}.workspace{padding:0 12px}.panels{grid-template-columns:1fr}.receipt,.stock{max-width:540px;width:100%;margin:auto}.mode-btn{min-width:135px}.fridge-section{margin-top:15px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* FRESH'D — FILL FRIDGE LAYOUT FIX */
+
+.fridge-page {
+    width: min(100%, 1500px);
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+    box-sizing: border-box;
+}
+
+.fridge-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.5fr);
+    align-items: start;
+    gap: 20px;
+    width: 100%;
+}
+
+.receipt-panel,
+.stock-panel,
+.fridge-panel {
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.receipt-panel {
+    background: #f2e2c7;
+    color: #111;
+    padding: 28px 22px;
+    border-radius: 4px;
+}
+
+.receipt-panel form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.receipt-panel input,
+.receipt-panel select {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 11px;
+    box-sizing: border-box;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 12px;
+}
+
+.form-row > div {
+    min-width: 0;
+}
+
+.stock-panel {
+    background: #050505;
+    color: white;
+    border: 1px solid #777;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.fridge-panel {
+    width: 100%;
+}
+
+.fridge-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+}
+
+#fridge-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.mode-switch {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 22px;
+    gap: 0;
+}
+
+.mode-btn {
+    padding: 12px 24px;
+    border: 0;
+    cursor: pointer;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+}
+
+#add-mode-btn {
+    background: white;
+    color: black;
+    border-radius: 30px 0 0 30px;
+}
+
+#organize-mode-btn {
+    background: #b31512;
+    color: white;
+    border-radius: 0 30px 30px 0;
+}
+
+@media (max-width: 1000px) {
+    .fridge-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .fridge-panel {
+        grid-column: 1 / -1;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 650px) {
+    .fridge-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .fridge-panel {
+        grid-column: auto;
+    }
+
+    .fridge-page {
+        padding: 16px;
+    }
+}
+
+
+/* FRESH'D — UPDATED FILL FRIDGE PROPORTIONS */
+
+.fridge-page {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 30px 60px;
+    box-sizing: border-box;
+}
+
+/* Smaller receipt, wider stock, larger fridge */
+.fridge-layout {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 0.8fr)
+        minmax(0, 1.15fr)
+        minmax(0, 1.55fr);
+    gap: 20px;
+    align-items: start;
+}
+
+/* RECEIPT */
+.receipt-panel {
+    width: 100%;
+    min-width: 0;
+    padding: 24px 18px;
+    box-sizing: border-box;
+}
+
+.receipt-header h1 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.receipt-panel label {
+    font-size: 13px;
+}
+
+.receipt-panel input,
+.receipt-panel select {
+    font-size: 13px;
+    padding: 10px;
+}
+
+/* STOCK */
+.stock-panel {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    min-height: 600px;
+}
+
+/* FRIDGE */
+.fridge-panel {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.fridge-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+#fridge-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Keep navigation above page content */
+.site-header {
+    position: relative;
+    z-index: 10;
+}
+
+.sticker-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(4px, 1vw, 16px);
+}
+
+.sticker-nav a {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.sticker-nav img {
+    display: block;
+    width: clamp(58px, 8vw, 120px);
+    height: clamp(58px, 8vw, 120px);
+    object-fit: contain;
+}
+
+@media (max-width: 950px) {
+    .sticker-nav img {
+        width: clamp(58px, 8vw, 76px);
+        height: clamp(58px, 8vw, 76px);
+    }
+}
+
+/* Place mode buttons below navigation */
+.mode-switch {
+    position: relative;
+    z-index: 1;
+    margin: 10px auto 24px;
+}
+
+/* FRIDGE VIEW BUTTONS */
+.fridge-view-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.fridge-view-buttons button {
+    padding: 9px 12px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* TABLET */
+@media (max-width: 1050px) {
+    .fridge-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .fridge-panel {
+        grid-column: 1 / -1;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 650px) {
+    .fridge-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .fridge-panel {
+        grid-column: auto;
+    }
+
+    .stock-panel {
+        min-height: 350px;
+    }
+
+}
+
+/* BUTTON INTERACTIONS */
+
+.receipt-panel[hidden],
+.organize-instructions[hidden],
+#stock-list [hidden] {
+    display: none !important;
+}
+
+.fridge-layout:has(.stock-panel.organize-mode) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+}
+
+.stock-panel.organize-mode {
+    grid-column: 1;
+}
+
+@media (max-width: 600px) {
+    .sticker-nav {
+        justify-content: flex-start;
+        gap: 8px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: thin;
+    }
+
+    .sticker-nav a {
+        flex: 0 0 64px;
+    }
+
+    .sticker-nav img {
+        width: 64px;
+        height: 64px;
+    }
+}
+
+.fridge-layout:has(.stock-panel.organize-mode) .fridge-panel {
+    grid-column: 2;
+}
+
+.mode-btn,
+.filter-btn,
+.fridge-view-buttons button {
+    cursor: pointer;
+}
+
+.fridge-view-buttons button.active {
+    background: #b31512;
+    color: white;
+    border-color: #b31512;
+}
+
+.filter-btn.active {
+    background: white;
+    color: black;
+}
+
+.mode-switch {
+    transform: translateX(-10px);
+}
+
+/* ==========================================
+   FRESH'D — YOUR STOCK CARD DESIGN FIX
+   ========================================== */
+
+.stock-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.stock-item {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding: 16px;
+    background: #101010;
+    border: 1px solid #555;
+    border-radius: 12px;
+    color: #fff;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.food-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    width: 44px;
+    height: 44px;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.food-details {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    width: 100%;
+}
+
+.food-details strong {
+    display: block;
+    font-size: 16px;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+    margin-bottom: 6px;
+}
+
+.food-meta {
+    display: block;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #bbb;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.food-actions {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+}
+
+.food-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 9px 6px;
+    background: transparent;
+    border: 1px solid #777;
+    border-radius: 5px;
+    color: white;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.food-actions button:hover {
+    background: #b31512;
+    border-color: #b31512;
+    color: white;
+}
+
+.food-picture {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.stock-item.selected {
+    border-color: #b31512;
+}
+
+.stock-empty {
+    padding: 35px 10px;
+    text-align: center;
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* Extra stock buttons */
+
+.add-another-btn,
+.clear-stock-btn {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    padding: 10px 12px;
+    margin-top: 14px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.clear-stock-btn {
+    background: transparent;
+    color: #ddd;
+    border: 1px solid #777;
+    border-radius: 4px;
+}
+
+.clear-stock-btn:hover {
+    background: #b31512;
+    border-color: #b31512;
+    color: white;
+}
+
+/* DRAGGABLE FOOD INSIDE FRIDGE */
+
+#fridge-container {
+    position: relative;
+}
+
+#placed-foods {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.placed-food {
+    position: absolute;
+    pointer-events: auto;
+    cursor: grab !important;
+    touch-action: none;
+    user-select: none;
+    z-index: 6;
+}
+
+.placed-food:active {
+    cursor: grabbing !important;
+    transform: translate(-50%, -50%) scale(1.15) !important;
+}
+
+.drop-zone {
+    z-index: 2;
+}
+
+.drop-zone.drag-over {
+    outline: 2px dashed #b31512;
+    background: rgba(179, 21, 18, 0.15);
+}
+
+/* DATE TYPE SELECTOR */
+
+.date-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.date-section select,
+.date-section input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+#date-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#date-input-container[hidden] {
+    display: none !important;
+}
+
+.date-section label {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}

@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fill Pantry | Fresh'd</title>
+  <link rel="icon" href="images/freshd-logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fill-pantry.css">
+  <script src="js/fill-pantry.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="sticker-nav" aria-label="Main navigation">
+      <a href="fill-fridge.html"><img src="images/fill-fridge-button.png" alt="Fill Fridge"></a>
+      <a href="fill-pantry.html" aria-current="page"><img src="images/fill-pantry-button.png" alt="Fill Pantry"></a>
+      <a href="buy-list.html"><img src="images/buy-list-button.png" alt="Buy List"></a>
+      <a href="index.html" class="brand"><img src="images/freshd-logo.png" alt="Fresh'd Home"></a>
+      <a href="customize.html"><img src="images/customize-button.png" alt="Customize"></a>
+      <a href="use-by.html"><img src="images/use-by-button.png" alt="Use By"></a>
+      <a href="about.html"><img src="images/about-button.png" alt="About Us"></a>
+    </nav>
+  </header>
+
+  <main class="pantry-page">
+    <section class="pantry-hero">
+      <div>
+        <p class="pantry-eyebrow">FRESH'D / YOUR FOOD, YOUR RULES</p>
+        <h1>FILL <span>PANTRY.</span></h1>
+        <p class="pantry-tagline">GOOD THINGS BELONG ON THE SHELF.</p>
+        <p class="pantry-intro">
+          From pasta to peanut butter, keep your pantry stocked,
+          organized, and ready for whatever's cooking.
+        </p>
+      </div>
+      <div class="pantry-hero-stamp">STOCK<br>IT UP!<span>★</span></div>
+    </section>
+
+    <section class="pantry-layout">
+      <div class="pantry-form-wrap">
+        <div class="pantry-receipt">
+          <p class="receipt-brand">*** FRESH'D ***</p>
+          <h2 id="pantry-form-title">ADD TO<br>YOUR PANTRY</h2>
+          <p class="receipt-caption">THE PANTRY STOCK-IN SLIP</p>
+          <div class="receipt-rule"></div>
+
+          <form id="pantry-form" novalidate>
+            <label for="pantry-name">01 / WHAT'S THE FOOD? *</label>
+            <input id="pantry-name" type="text" maxlength="80" placeholder="E.G. RIGATONI PASTA" required>
+
+            <label for="pantry-category">02 / CATEGORY *</label>
+            <select id="pantry-category" required>
+              <option value="">SELECT CATEGORY</option>
+              <option value="Grains & Pasta">Grains & Pasta</option>
+              <option value="Canned Goods">Canned Goods</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Baking">Baking</option>
+              <option value="Condiments">Condiments</option>
+              <option value="Beverages">Beverages</option>
+              <option value="Spices">Spices</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <div class="form-two">
+              <div>
+                <label for="pantry-quantity">03 / QUANTITY *</label>
+                <input id="pantry-quantity" type="number" min="1" max="9999" step="1" value="1" required>
+              </div>
+              <div>
+                <label for="pantry-unit">04 / UNIT</label>
+                <select id="pantry-unit">
+                  <option value="pcs">Pieces</option>
+                  <option value="cans">Cans</option>
+                  <option value="boxes">Boxes</option>
+                  <option value="bags">Bags</option>
+                  <option value="jars">Jars</option>
+                  <option value="bottles">Bottles</option>
+                  <option value="packs">Packs</option>
+                </select>
+              </div>
+            </div>
+
+            <label for="pantry-brand">05 / BRAND (OPTIONAL)</label>
+            <input id="pantry-brand" type="text" maxlength="80" placeholder="E.G. BARILLA">
+
+            <label for="pantry-date-type">06 / DATE TYPE</label>
+            <select id="pantry-date-type">
+              <option value="expiration">Expiration / Best Before</option>
+              <option value="purchased">Purchase Date</option>
+              <option value="production">Production Date</option>
+              <option value="none">No Date</option>
+            </select>
+
+            <div id="pantry-date-wrap">
+              <label for="pantry-date">07 / DATE</label>
+              <input id="pantry-date" type="date">
+            </div>
+
+            <p id="pantry-error" class="pantry-error" role="alert" hidden></p>
+
+            <button type="submit" class="pantry-submit" id="pantry-submit">
+              + ADD TO PANTRY ↗
+            </button>
+            <button type="button" class="pantry-cancel" id="pantry-cancel" hidden>
+              CANCEL EDIT
+            </button>
+          </form>
+          <p class="receipt-bottom">THANK YOU FOR KEEPING IT FRESH!</p>
+        </div>
+      </div>
+
+      <div class="pantry-stock-wrap">
+        <div class="stock-header">
+          <div>
+            <p class="pantry-eyebrow">01 / YOUR SHELF, YOUR RULES</p>
+            <h2>THE PANTRY<br><span>SHELF.</span></h2>
+          </div>
+          <div class="pantry-total">
+            <strong id="pantry-total">0</strong>
+            <span>ITEMS IN STOCK</span>
+          </div>
+        </div>
+
+        
+<div class="pantry-cabinet">
+  <p class="pantry-cabinet-label">
+    YOUR PANTRY / DRAG TO ORGANIZE
+  </p>
+
+  <div
+    id="pantry-shelves"
+    class="pantry-shelves"
+    aria-label="Interactive pantry shelves"
+  >
+    <div class="pantry-shelf" data-shelf="0"></div>
+    <div class="pantry-shelf" data-shelf="1"></div>
+    <div class="pantry-shelf" data-shelf="2"></div>
+  </div>
+
+  <p class="pantry-shelf-hint">
+    DRAG FOOD BETWEEN SHELVES · USE THE ARROWS ON MOBILE
+  </p>
+</div>
+
+
+        <div class="pantry-controls">
+          <input id="pantry-search" type="search" placeholder="SEARCH YOUR PANTRY..." aria-label="Search pantry">
+          <select id="pantry-filter" aria-label="Filter pantry by category">
+            <option value="all">ALL CATEGORIES</option>
+            <option value="Grains & Pasta">GRAINS & PASTA</option>
+            <option value="Canned Goods">CANNED GOODS</option>
+            <option value="Snacks">SNACKS</option>
+            <option value="Baking">BAKING</option>
+            <option value="Condiments">CONDIMENTS</option>
+            <option value="Beverages">BEVERAGES</option>
+            <option value="Spices">SPICES</option>
+            <option value="Other">OTHER</option>
+          </select>
+          <select id="pantry-sort" aria-label="Sort pantry">
+            <option value="newest">NEWEST FIRST</option>
+            <option value="name">NAME A–Z</option>
+            <option value="date">EXPIRY DATE</option>
+          </select>
+        </div>
+
+        <p id="pantry-results" class="pantry-results" aria-live="polite">0 ITEMS</p>
+        <div id="pantry-list" class="pantry-list" aria-live="polite"></div>
+
+        <div class="pantry-bottom">
+          <span>FRESH'D / PANTRY INVENTORY</span>
+          <button type="button" id="pantry-reset">CLEAR PANTRY ↗</button>
+        </div>
+        <p id="pantry-message" class="pantry-message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pantry-footer">FRESH'D © 2026 · YOUR FRIDGE, YOUR RULES.</footer>
+</body>
+</html>

@@ -1,0 +1,668 @@
+
+/* =========================================
+   FRESH'D — FILL PANTRY
+   ========================================= */
+
+.pantry-page {
+  --pantry-cream: #f3ead6;
+  --pantry-green: #a6b77c;
+  --pantry-red: #b31512;
+
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 65px 7% 100px;
+  box-sizing: border-box;
+}
+
+.pantry-page *,
+.pantry-page *::before,
+.pantry-page *::after {
+  box-sizing: border-box;
+}
+
+/* HERO */
+
+.pantry-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  padding-bottom: 55px;
+  border-bottom: 1px solid #444;
+}
+
+.pantry-eyebrow {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.pantry-hero h1 {
+  margin: 20px 0;
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -6px;
+}
+
+.pantry-hero h1 span,
+.stock-header h2 span {
+  color: var(--pantry-green);
+}
+
+.pantry-tagline {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.pantry-intro {
+  max-width: 520px;
+  color: #c4c0b7;
+  line-height: 1.8;
+}
+
+.pantry-hero-stamp {
+  flex: 0 0 145px;
+  width: 145px;
+  height: 145px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 3px dashed var(--pantry-cream);
+  background: var(--pantry-red);
+  color: white;
+  font-size: 23px;
+  font-weight: 900;
+  text-align: center;
+  transform: rotate(12deg);
+}
+
+.pantry-hero-stamp span {
+  font-size: 32px;
+  margin-top: 8px;
+}
+
+/* MAIN LAYOUT */
+
+.pantry-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(280px, 0.8fr)
+    minmax(0, 1.2fr);
+  gap: 65px;
+  padding-top: 65px;
+  align-items: start;
+}
+
+/* RECEIPT */
+
+.pantry-receipt {
+  min-width: 0;
+  background: var(--pantry-cream);
+  color: #1b1a16;
+  padding: 35px;
+  box-shadow: 10px 10px 0 #242820;
+}
+
+.receipt-brand,
+.receipt-caption,
+.receipt-bottom {
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 11px;
+}
+
+.pantry-receipt h2 {
+  text-align: center;
+  font-size: clamp(32px, 4vw, 53px);
+  line-height: 0.95;
+  letter-spacing: -2px;
+  margin: 24px 0;
+}
+
+.receipt-rule {
+  border-top: 2px dashed #333;
+  margin: 25px 0;
+}
+
+#pantry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#pantry-form label {
+  display: block;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-top: 12px;
+}
+
+#pantry-form input,
+#pantry-form select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 14px 12px;
+  background: #fffdf6;
+  border: 2px solid #2d2b24;
+  border-radius: 0;
+  color: #191919;
+  font-size: 13px;
+}
+
+#pantry-form input:focus,
+#pantry-form select:focus,
+.pantry-controls input:focus,
+.pantry-controls select:focus {
+  outline: 3px solid #9bac72;
+  outline-offset: 2px;
+}
+
+.form-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-two > * {
+  min-width: 0;
+}
+
+#pantry-date-wrap[hidden],
+#pantry-error[hidden],
+#pantry-cancel[hidden] {
+  display: none;
+}
+
+.pantry-error {
+  color: #aa231c;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.pantry-submit {
+  margin-top: 22px;
+  padding: 18px;
+  background: var(--pantry-green);
+  color: #111;
+  border: 2px solid #222;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.pantry-submit:hover {
+  background: #d9b85b;
+}
+
+.pantry-cancel {
+  padding: 12px;
+  background: transparent;
+  border: 2px solid #222;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.receipt-bottom {
+  margin-top: 32px;
+}
+
+/* PANTRY HEADING */
+
+.stock-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.stock-header h2 {
+  margin: 14px 0;
+  font-size: clamp(44px, 5vw, 75px);
+  letter-spacing: -4px;
+  line-height: 0.95;
+}
+
+.pantry-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 105px;
+  padding: 15px;
+  background: var(--pantry-green);
+  color: #161914;
+  transform: rotate(5deg);
+}
+
+.pantry-total strong {
+  font-size: 45px;
+  line-height: 1;
+}
+
+.pantry-total span {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* =========================================
+   PANTRY — FREE DRAG AREA
+   ========================================= */
+
+.pantry-cabinet {
+  width: 100%;
+  min-width: 0;
+  margin: 28px 0 35px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.pantry-cabinet-label {
+  margin: 0 0 14px;
+  color: var(--pantry-cream);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.pantry-shelves,
+.pantry-stage {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  padding: 0;
+  margin: 0;
+
+  background-image: url("../images/pantry.png");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+  border: 0;
+  box-shadow: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Remove the old three-row shelf layout */
+
+.pantry-shelf {
+  display: contents;
+}
+
+/* Food items can be placed anywhere */
+
+.pantry-shelf-item,
+.pantry-food {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+
+  width: clamp(45px, 6vw, 72px);
+  min-height: 45px;
+  margin: 0;
+  padding: 4px;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: white;
+
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  z-index: 5;
+}
+
+.pantry-shelf-item:active,
+.pantry-food:active {
+  cursor: grabbing;
+}
+
+.pantry-shelf-item:hover,
+.pantry-food:hover {
+  background: rgba(166, 183, 124, 0.16);
+}
+
+.pantry-shelf-item.dragging,
+.pantry-food.dragging {
+  opacity: 0.7;
+  z-index: 20;
+}
+
+.pantry-shelf-item img,
+.pantry-food img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.pantry-shelf-emoji {
+  font-size: clamp(25px, 3vw, 42px);
+  line-height: 1.1;
+  pointer-events: none;
+}
+
+.pantry-shelf-name {
+  width: 100%;
+  color: white;
+  font-size: 10px;
+  font-weight: 900;
+  text-align: center;
+  overflow-wrap: anywhere;
+  text-shadow: 1px 2px 3px #000;
+  pointer-events: none;
+}
+
+/* Hide old up/down arrows */
+
+.pantry-shelf-move {
+  display: none !important;
+}
+
+.pantry-shelf-hint {
+  margin: 15px 0 0;
+  color: #b8c0a8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* OLD DECORATIVE SHELF */
+
+.pantry-shelf-art {
+  display: none;
+}
+
+/* SEARCH AND FILTERS */
+
+.pantry-controls {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  gap: 10px;
+}
+
+.pantry-controls input,
+.pantry-controls select {
+  width: 100%;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #74746a;
+  background: #1c1d19;
+  color: var(--pantry-cream);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+#pantry-search {
+  grid-column: 1 / -1;
+}
+
+.pantry-results {
+  margin: 24px 0 12px;
+  color: #b5b0a4;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+/* INVENTORY LIST */
+
+.pantry-list {
+  display: grid;
+  gap: 12px;
+}
+
+.pantry-item {
+  display: grid;
+  grid-template-columns: 55px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: #1b1f18;
+  border: 1px solid #4b5740;
+}
+
+.pantry-item-emoji {
+  font-size: 38px;
+  text-align: center;
+}
+
+.pantry-item h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+
+.pantry-item p {
+  margin: 5px 0;
+  color: #c3c6b7;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.pantry-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pantry-item-actions button {
+  padding: 9px 12px;
+  border: 1px solid #b1b7a4;
+  background: transparent;
+  color: var(--pantry-cream);
+  font-size: 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.pantry-item-actions button:hover {
+  background: var(--pantry-green);
+  color: #111;
+}
+
+.pantry-item-actions .delete-btn:hover {
+  background: var(--pantry-red);
+  color: white;
+}
+
+/* EMPTY STATE */
+
+.pantry-empty {
+  padding: 70px 20px;
+  text-align: center;
+  border: 2px dashed #526046;
+}
+
+.pantry-empty span {
+  font-size: 60px;
+}
+
+.pantry-empty h3 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.pantry-empty p {
+  color: #b5b0a4;
+  font-size: 13px;
+}
+
+/* FOOTER AND RESET */
+
+.pantry-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #454b3d;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+#pantry-reset {
+  padding: 12px 15px;
+  background: transparent;
+  border: 1px solid var(--pantry-red);
+  color: #ef8b7b;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+#pantry-reset:hover {
+  background: var(--pantry-red);
+  color: white;
+}
+
+.pantry-message {
+  min-height: 22px;
+  color: var(--pantry-green);
+  font-size: 12px;
+}
+
+.pantry-footer {
+  padding: 25px;
+  border-top: 1px solid #333;
+  text-align: center;
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+  .pantry-page {
+    padding: 45px 5% 70px;
+  }
+
+  .pantry-layout {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .pantry-receipt {
+    max-width: 580px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .pantry-hero {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .pantry-hero h1 {
+    font-size: clamp(45px, 10vw, 70px);
+    letter-spacing: -3px;
+  }
+
+  .pantry-hero-stamp {
+    flex: 0 0 75px;
+    width: 75px;
+    height: 75px;
+    font-size: 12px;
+  }
+
+  .pantry-hero-stamp span {
+    font-size: 18px;
+  }
+
+  .pantry-receipt {
+    padding: 25px 20px;
+    box-shadow: 5px 5px 0 #242820;
+  }
+
+  .stock-header h2 {
+    font-size: 43px;
+    letter-spacing: -2px;
+  }
+
+  .pantry-total {
+    min-width: 75px;
+    padding: 10px;
+  }
+
+  .pantry-total strong {
+    font-size: 32px;
+  }
+
+  .pantry-item {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .pantry-item-emoji {
+    font-size: 30px;
+  }
+
+  .pantry-item-actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+
+  .pantry-item-actions button {
+    flex: 1;
+  }
+
+  .pantry-controls {
+    grid-template-columns: 1fr;
+  }
+
+  #pantry-search {
+    grid-column: auto;
+  }
+
+  .pantry-shelf-item,
+  .pantry-food {
+    width: 48px;
+  }
+
+  .pantry-shelf-emoji {
+    font-size: 25px;
+  }
+
+  .pantry-shelf-name {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .pantry-hero {
+    flex-direction: column;
+  }
+
+  .form-two {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fresh'd — Your Fridge, Your Rules</title>
+
+  <link rel="icon" href="images/freshd-logo.png">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/inventory.js" defer></script>
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- SHARED NAVIGATION -->
+  <header class="site-header">
+    <nav class="sticker-nav" aria-label="Main navigation">
+
+      <a href="fill-fridge.html">
+        <img src="images/fill-fridge-button.png" alt="Fill Fridge">
+      </a>
+
+      <a href="fill-pantry.html">
+        <img src="images/fill-pantry-button.png" alt="Fill Pantry">
+      </a>
+
+      <a href="buy-list.html">
+        <img src="images/buy-list-button.png" alt="Buy List">
+      </a>
+
+      <a href="index.html" class="brand" aria-current="page">
+        <img src="images/freshd-logo.png" alt="Fresh'd Home">
+      </a>
+
+      <a href="customize.html">
+        <img src="images/customize-button.png" alt="Customize">
+      </a>
+
+      <a href="use-by.html">
+        <img src="images/use-by-button.png" alt="Use By">
+      </a>
+
+      <a href="about.html">
+        <img src="images/about-button.png" alt="About Us">
+      </a>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="home-hero">
+
+      <div class="home-hero-copy">
+
+        <p class="home-eyebrow">
+          FRESH'D / YOUR FOOD, YOUR RULES
+        </p>
+
+        <h1>
+          KEEP IT<br>
+          <span>FRESH'D.</span>
+        </h1>
+
+        <p class="home-tagline">
+          YOUR FRIDGE. YOUR FOOD. YOUR WAY.
+        </p>
+
+        <p class="home-description">
+          A little less food waste. A lot more fridge
+          organization. Keep track of what you have,
+          know what to use first, and never forget
+          what's on your grocery list.
+        </p>
+
+        <div class="home-hero-actions">
+
+          <a href="fill-fridge.html" class="home-primary-btn">
+            + FILL YOUR FRIDGE ↗
+          </a>
+
+          <a href="use-by.html" class="home-secondary-btn">
+            CHECK WHAT'S FRESH →
+          </a>
+
+        </div>
+
+        <p class="home-small-note">
+          NO MORE FORGOTTEN GROCERIES.
+        </p>
+
+      </div>
+
+      <!-- INTERACTIVE FRIDGE -->
+      <div class="home-fridge-area">
+
+        <div class="home-fridge-sticker">
+          OPEN ME!
+          <span>↘</span>
+        </div>
+
+        <button
+          type="button"
+          id="home-fridge-button"
+          class="home-fridge-button"
+          aria-label="Open refrigerator"
+          aria-expanded="false"
+        >
+          <img
+            id="home-fridge-image"
+            src="images/fridge-closed.png"
+            alt="Closed silver refrigerator"
+          >
+        </button>
+
+        <p class="home-fridge-hint">
+          ↖ CLICK THE FRIDGE TO OPEN IT
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="home-marquee" aria-label="Fresh'd motto">
+      <div class="home-marquee-track">
+        FILL IT ★ TRACK IT ★ USE IT ★ LOVE IT ★
+        FILL IT ★ TRACK IT ★ USE IT ★ LOVE IT ★
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <section class="home-features">
+
+      <div class="home-section-heading">
+
+        <div>
+          <p class="home-eyebrow">
+            01 / THE FRESH'D EXPERIENCE
+          </p>
+
+          <h2>
+            YOUR KITCHEN,<br>
+            <span>SORTED.</span>
+          </h2>
+        </div>
+
+        <p>
+          EVERYTHING YOU NEED TO KEEP YOUR
+          GROCERIES IN CHECK.
+        </p>
+
+      </div>
+
+      <div class="home-feature-grid">
+
+        <a href="fill-fridge.html" class="home-feature-card feature-green">
+          <span class="feature-number">01 / STOCK UP</span>
+          <span class="feature-icon">🥬</span>
+          <h3>FILL<br>FRIDGE.</h3>
+          <p>
+            Add your groceries and organize
+            them inside your own fridge.
+          </p>
+          <span class="feature-arrow">↗</span>
+        </a>
+
+        <a href="fill-pantry.html" class="home-feature-card feature-cream">
+          <span class="feature-number">02 / STORE IT</span>
+          <span class="feature-icon">🥫</span>
+          <h3>FILL<br>PANTRY.</h3>
+          <p>
+            Keep track of the food
+            stored outside your fridge.
+          </p>
+          <span class="feature-arrow">↗</span>
+        </a>
+
+        <a href="use-by.html" class="home-feature-card feature-red">
+          <span class="feature-number">03 / SAVE IT</span>
+          <span class="feature-icon">🍓</span>
+          <h3>USE<br>BY.</h3>
+          <p>
+            Find out what needs your
+            attention before it goes to waste.
+          </p>
+          <span class="feature-arrow">↗</span>
+        </a>
+
+        <a href="buy-list.html" class="home-feature-card feature-dark">
+          <span class="feature-number">04 / SHOP SMART</span>
+          <span class="feature-icon">🛒</span>
+          <h3>BUY<br>LIST.</h3>
+          <p>
+            Make your grocery list
+            and remember what to buy.
+          </p>
+          <span class="feature-arrow">↗</span>
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- INVENTORY PREVIEW -->
+    <section class="home-stock-section">
+
+      <div class="home-stock-copy">
+
+        <p class="home-eyebrow">
+          02 / YOUR KITCHEN AT A GLANCE
+        </p>
+
+        <h2>
+          WHAT'S<br>
+          <span>IN STOCK?</span>
+        </h2>
+
+        <p>
+          Your fridge inventory is saved right
+          here in your browser. Add something
+          to your fridge and see your stock
+          update automatically.
+        </p>
+
+        <a href="fill-fridge.html" class="home-primary-btn">
+          VIEW YOUR FRIDGE ↗
+        </a>
+
+      </div>
+
+      <div class="home-stock-receipt">
+
+        <p class="home-receipt-top">
+          *** FRESH'D ***
+        </p>
+
+        <h3>
+          KITCHEN<br>
+          RECEIPT
+        </h3>
+
+        <p class="home-receipt-sub">
+          YOUR DAILY STOCK CHECK
+        </p>
+
+        <div class="home-receipt-rule"></div>
+
+        <div class="home-receipt-line">
+          <span>FRIDGE ITEMS</span>
+          <strong id="home-fridge-count">0</strong>
+        </div>
+
+        <div class="home-receipt-line">
+          <span>FREEZER ITEMS</span>
+          <strong id="home-freezer-count">0</strong>
+        </div>
+
+        <div class="home-receipt-rule"></div>
+
+        <div class="home-receipt-line home-receipt-total">
+          <span>TOTAL GROCERIES</span>
+          <strong id="home-total-count">0</strong>
+        </div>
+
+        <div class="home-barcode"></div>
+
+        <p class="home-receipt-bottom">
+          THANK YOU FOR KEEPING IT FRESH!
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="home-final-cta">
+
+      <p class="home-eyebrow">
+        GOOD FOOD DESERVES BETTER.
+      </p>
+
+      <h2>
+        DON'T LET<br>
+        IT <span>ROT.</span>
+      </h2>
+
+      <p>
+        YOUR NEXT FRESH START IS ONE CLICK AWAY.
+      </p>
+
+      <a href="fill-fridge.html" class="home-primary-btn">
+        LET'S GET FRESH'D ↗
+      </a>
+
+    </section>
+
+  </main>
+
+  <footer class="home-footer">
+    <span>FRESH'D © 2026</span>
+    <span>YOUR FRIDGE, YOUR RULES.</span>
+    <a href="about.html">ABOUT FRESH'D ↗</a>
+  </footer>
+
+</body>
+</html>
