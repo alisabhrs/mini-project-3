@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trial A — Receipt Card | Fresh'd</title>
+  <style>
+    body { margin: 0; padding: 32px 16px; background: #0b0b0b; color: #f5f0e6; font-family: Arial, Helvetica, sans-serif; }
+    h1 { font-size: 13px; letter-spacing: 3px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; max-width: 1100px; }
+    .card { background: #f5f0e6; color: #111; padding: 22px; font-family: "Courier New", monospace; }
+    .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; filter: grayscale(.2); }
+    .card h2 { font-family: Arial, Helvetica, sans-serif; font-weight: 900; letter-spacing: -1px; font-size: 22px; margin: 14px 0 4px; }
+    .rule { border-top: 1px dashed #111; margin: 12px 0; }
+    .line { display: flex; justify-content: space-between; font-size: 13px; margin: 4px 0; }
+    .total { font-weight: bold; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h1>TRIAL A / RECEIPT CARD</h1>
+  <div class="grid">
+    <article class="card">
+      <img src="../images/pantry.png" alt="">
+      <h2>SPINACH OMELETTE</h2>
+      <p>BREAKFAST</p>
+      <div class="rule"></div>
+      <p class="line"><span>EGG</span><span>✓ HAVE</span></p>
+      <p class="line"><span>SPINACH</span><span>✓ HAVE</span></p>
+      <p class="line"><span>FETA</span><span>✗ NEED</span></p>
+      <div class="rule"></div>
+      <p class="line total"><span>MATCH</span><span>67%</span></p>
+    </article>
+  </div>
+</body>
+</html>
