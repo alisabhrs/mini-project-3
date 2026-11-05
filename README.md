@@ -1,7 +1,7 @@
 # Fresh'd 🥬 — What Can I Make?
 ### Know what you have. Use what you love. Waste less.
 
-**Live site:** _TODO: add GitHub Pages URL after deploying_ (e.g. `https://alisabhrs.github.io/freshd-recipe-matching/`)
+**Live site:** https://alisabhrs.github.io/mini-project-3/
 
 ## What Fresh'd Does
 Fresh'd is a kitchen inventory website. You save the food in your fridge, freezer, and pantry, and Fresh'd tracks what is expiring.

@@ -25,14 +25,15 @@ It is also for anyone who opens the fridge and doesn't know what to cook with wh
   - From `lookup.php`: `strMeal`, `strMealThumb`, `strCategory`, `strInstructions`, `strIngredient1` to `strIngredient20`, `strMeasure1` to `strMeasure20`
 
 ## What the User Chooses
-The user picks one ingredient from their own Fresh'd inventory, such as spinach. Fresh'd pre-selects the item that expires soonest.
+- **Ingredients:** the user picks 1 to 5 ingredients from their own Fresh'd inventory, such as eggs and spinach. Fresh'd pre-selects the item that expires soonest.
+- **Kitchen tools:** the user ticks the tools they own (stove, oven, air fryer, blender, …) and can choose one tool to cook with. Only recipes whose instructions mention that tool are shown.
 
 ## What the Page Calculates
 For each recipe:
 
 **Match score = ingredients I have ÷ ingredients the recipe needs × 100**
 
-Recipes are ranked from highest to lowest match. If two recipes tie, the one that uses more of my "use soon" food comes first.
+Recipes are ranked from highest to lowest match. If two recipes tie, the one that uses more of the ingredients I picked comes first, then the one that uses more of my "use soon" food.
 
 The score only compares ingredient names. It does not check whether I have enough of each one.
 
@@ -47,4 +48,5 @@ The score only compares ingredient names. It does not check whether I have enoug
 - Whether TheMealDB's ingredient names will match the names I type in Fresh'd ("Eggs" vs "Egg").
 - How to wait for several recipe requests at the same time without making the page slow.
 - How to show a helpful error when the internet is off.
-- 🔎 Whether the free API can search for more than one ingredient at once. I think it can't, so I plan to search one ingredient at a time.
+- 🔎 Whether the free API can search for more than one ingredient at once. I think it can't, so I plan to search each picked ingredient separately and combine the results.
+- How well I can tell which kitchen tools a recipe needs, because TheMealDB doesn't list equipment. I plan to look for words like "blend" or "bake" in the instructions.
