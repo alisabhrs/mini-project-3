@@ -1,94 +1,57 @@
-# Fresh'd 🥬
-### Your Fridge, Your Food, Your Rules.
+# Fresh'd 🥬 — What Can I Make?
+### Know what you have. Use what you love. Waste less.
 
-## About the Project
+**Live site:** _TODO: add GitHub Pages URL after deploying_ (e.g. `https://alisabhrs.github.io/freshd-recipe-matching/`)
 
-Fresh'd is a grocery inventory management website designed to help users organize their groceries, keep track of what they already have, and reduce food waste.
+## What Fresh'd Does
+Fresh'd is a kitchen inventory website. You save the food in your fridge, freezer, and pantry, and Fresh'd tracks what is expiring.
 
-I created Fresh'd because I wanted a simple way to remember what was in my fridge, freezer, and pantry without having to check everything manually.
+The new **What Can I Make?** page uses that inventory to find real recipes from TheMealDB. For each recipe it calculates:
+- a **match score**: how many of the recipe's ingredients you already have
+- what you **have** and what you still **need**
 
-The goal is to make grocery organization more convenient, practical, and visually engaging.
+It ranks the best matches first and favors recipes that use food you should eat soon.
 
-## Features
+## Who It Is For
+People like me who forget what's already in the fridge, buy things twice, or let food expire, and who want ideas for cooking with what they already have.
 
-- **Fill Fridge:** Add groceries with their names, categories, quantities, storage locations, and dates.
-- **Fill Pantry:** Organize pantry items.
-- **Use By:** Track expiration dates and see which groceries are expired, expiring soon, or still fresh.
-- **Buy List:** Keep track of groceries to purchase.
-- **Customize:** Personalize the Fresh'd experience.
-- **Interactive Homepage:** Open and close the refrigerator and view a summary of saved groceries.
+## API
+- **TheMealDB:** https://www.themealdb.com/api.php
+- Free test key `1`, so there is no private key to hide.
+- Endpoints used:
+  - `filter.php?i=<ingredient>`: recipes that use an ingredient
+  - `lookup.php?i=<id>`: full recipe with `strIngredient1–20`, `strMeasure1–20`, `strInstructions`
 
-## How to Use Fresh'd
+## How to Use It
+1. **Fill Fridge** or **Fill Pantry**: add your food, with expiration dates if you know them.
+2. **Use By**: see what's expired, what to use soon, and what's still fresh.
+3. **What Can I Make?**: pick an ingredient (the one expiring soonest is pre-selected) and press **Find Recipes**.
+4. Read each card's match %, what you have, and what you need. Press **Show recipe** for amounts and steps.
 
-1. Open the Fresh'd website.
-2. Go to **Fill Fridge** to add groceries.
-3. Enter the food name, quantity, category, storage location, and date.
-4. Save the grocery item to your inventory.
-5. Visit **Use By** to see which groceries need attention.
-6. Use the search, filter, and sorting options to organize your food.
-7. Visit **Buy List** to manage groceries you need to purchase.
+> The match % compares ingredient **names** only. It doesn't check whether you have enough of each.
 
-## How It Works
+## How the Match Score Works
+`Match % = ingredients you have ÷ ingredients in the recipe × 100`
 
-Fresh'd is built using:
+For example, Spinach Omelette needs Eggs, Spinach, and Feta. You have 2 of the 3, so 2 ÷ 3 × 100 ≈ **67%**.
 
-- HTML for the website structure
-- CSS for styling, layout, and animations
-- JavaScript for interactions and calculations
-- localStorage for saving user data
+- **Name matching:**
+  - Lowercase and singular ("Eggs" matches "Egg").
+  - Whole words only ("Cheese" matches "Cheddar Cheese", but "Egg" doesn't match "Eggplant").
+  - Expired food doesn't count.
+- **Ranking:** highest % first. On a tie, the recipe that uses more "use soon" food comes first.
 
-The website stores grocery information as JavaScript objects in an array.
+## Changes from Mini Project 2
+- Fixed: Fill Fridge showed pantry items, could turn them into fridge items, and "Clear All Stock" deleted the pantry.
+- Fixed: images were 34 MB, so each page downloaded about 26 MB. Same art, now 3.9 MB total.
+- Fixed: the Fill Fridge mode toggle highlighted the wrong button, and the phone nav cut off a sticker.
+- Fixed: the homepage receipt totals didn't add up (pantry wasn't listed).
+- Removed the empty Buy List, Customize, and About pages from the navigation.
 
-Each grocery item contains information such as its name, category, quantity, storage location, and date.
+## Where the Agent's Output Differed from My Expectations
+_TODO (Alisa): write this in your own words._
 
-JavaScript uses this information to calculate freshness statuses and update the displayed inventory.
+## AI Reflection
+> *Pick one piece of AI output you did not accept as-is. What did it give you, what did you change, and how did you know it needed changing? Point at the commit.*
 
-The inventory is saved in localStorage, allowing users to keep their groceries after refreshing the page.
-
-Data is stored locally in the user's browser rather than in an external database.
-
-## Design Direction
-
-I wanted Fresh'd to feel like a vintage grocery store instead of a traditional productivity website.
-
-The design includes:
-
-- Black backgrounds
-- Olive-green, cream, and red accents
-- Bold typography
-- Fruit-inspired navigation stickers
-- Grocery receipt-style layouts
-- Interactive refrigerator illustrations
-- Playful animations and hover effects
-
-My goal was to make grocery management feel more enjoyable while keeping the website functional and easy to navigate.
-
-## AI Collaboration and Revisions
-
-I used AI assistance throughout the development process for HTML, CSS, JavaScript, and debugging.
-
-One AI-generated solution I did not accept as-is was the original connection between the Fill Fridge and Use By pages.
-
-Initially, groceries saved in Fill Fridge were not appearing correctly in Use By.
-
-I reviewed the JavaScript and revised the inventory connection so both pages would read from the same localStorage key:
-
-`freshd-inventory-v1`
-
-This change was necessary because Use By needed to display and calculate freshness information using the groceries actually saved by the user.
-
-To verify the change, I tested adding groceries in Fill Fridge and checking whether the saved items appeared correctly in Use By.
-
-**Git commit showing this revision:** [ADD COMMIT LINK HERE]
-
-## What Changed From My Original Expectations
-
-Originally, I expected connecting different pages to be relatively straightforward.
-
-However, I learned that different pages need consistent data structures and storage keys to share information correctly.
-
-I also learned that debugging requires understanding how JavaScript stores, retrieves, and updates data, rather than focusing only on the visual interface.
-
-## Project Links
-
-https://github.com/alisabhrs/mini-project-2.git
+_TODO (Alisa): answer truthfully from your own review of the commits._
