@@ -90,6 +90,12 @@
     return item.storage === "freezer" || item.shelf === "freezer";
   }
 
+  // The inventory also holds pantry food (saved by Fill Pantry).
+  // This page only shows and changes fridge + freezer food.
+  function isPantry(item) {
+    return String(item.storage || "").toLowerCase() === "pantry";
+  }
+
   
 function expiryStatus(item) {
   if (!item.date || item.dateType === "none") {
@@ -213,14 +219,15 @@ function expiryStatus(item) {
 
   function render() {
     const count = $("stock-count");
+    const fridgeItems = items.filter(item => !isPantry(item));
 
     if (count) {
-      count.textContent = items.length;
+      count.textContent = fridgeItems.length;
     }
 
     list.replaceChildren();
 
-    const visibleItems = items.filter(item => {
+    const visibleItems = fridgeItems.filter(item => {
       if (filter === "all") return true;
       if (filter === "freezer") return isFreezer(item);
       return !isFreezer(item);
@@ -230,7 +237,7 @@ function expiryStatus(item) {
       const empty = document.createElement("p");
       empty.className = "stock-empty";
 
-      empty.textContent = items.length
+      empty.textContent = fridgeItems.length
         ? "No groceries in this section."
         : "YOUR FRIDGE IS EMPTY. ADD ITEMS TO GET STARTED!";
 
@@ -674,10 +681,11 @@ dateType: $("date-type").value,
     const clearButton = makeButton(
       "CLEAR ALL STOCK",
       () => {
-        if (!items.length) return;
+        if (!items.some(item => !isPantry(item))) return;
 
-        if (confirm("Delete all saved groceries?")) {
-          items = [];
+        if (confirm("Delete all fridge and freezer groceries? Pantry items will be kept.")) {
+          // Keep only pantry items.
+          items = items.filter(isPantry);
           saveItems();
           resetForm();
           render();
