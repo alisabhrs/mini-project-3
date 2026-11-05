@@ -134,6 +134,24 @@ document.addEventListener("DOMContentLoaded", () => {
       totalCount.textContent = items.length;
     }
 
+    // Pantry line, so FRIDGE + FREEZER + PANTRY adds up to TOTAL
+    const pantryCount = document.getElementById("home-pantry-count");
+
+    if (pantryCount) {
+      pantryCount.textContent = items.filter(item =>
+        String(item.storage || "").toLowerCase() === "pantry"
+      ).length;
+    }
+
+    // Items that expire in 0–3 days (same rule as Use By)
+    const soonCount = document.getElementById("home-soon-count");
+
+    if (soonCount && window.FreshdInventory) {
+      soonCount.textContent = items.filter(item =>
+        window.FreshdInventory.isUseSoon(item)
+      ).length;
+    }
+
   }
 
   // Update when homepage first loads

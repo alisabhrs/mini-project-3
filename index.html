@@ -20,35 +20,11 @@
   <!-- SHARED NAVIGATION -->
   <header class="site-header">
     <nav class="sticker-nav" aria-label="Main navigation">
-
-      <a href="fill-fridge.html">
-        <img src="images/fill-fridge-button.png" alt="Fill Fridge">
-      </a>
-
-      <a href="fill-pantry.html">
-        <img src="images/fill-pantry-button.png" alt="Fill Pantry">
-      </a>
-
-      <a href="buy-list.html">
-        <img src="images/buy-list-button.png" alt="Buy List">
-      </a>
-
-      <a href="index.html" class="brand" aria-current="page">
-        <img src="images/freshd-logo.png" alt="Fresh'd Home">
-      </a>
-
-      <a href="customize.html">
-        <img src="images/customize-button.png" alt="Customize">
-      </a>
-
-      <a href="use-by.html">
-        <img src="images/use-by-button.png" alt="Use By">
-      </a>
-
-      <a href="about.html">
-        <img src="images/about-button.png" alt="About Us">
-      </a>
-
+      <a href="fill-fridge.html"><img src="images/fill-fridge-button.png" alt="Fill Fridge"></a>
+      <a href="fill-pantry.html"><img src="images/fill-pantry-button.png" alt="Fill Pantry"></a>
+      <a href="index.html" class="brand" aria-current="page"><img src="images/freshd-logo.png" alt="Fresh'd Home"></a>
+      <a href="use-by.html"><img src="images/use-by-button.png" alt="Use By"></a>
+      <a href="what-can-i-make.html" class="nav-stamp"><span>What can I <strong>make?</strong></span></a>
     </nav>
   </header>
 
@@ -75,8 +51,8 @@
         <p class="home-description">
           A little less food waste. A lot more fridge
           organization. Keep track of what you have,
-          know what to use first, and never forget
-          what's on your grocery list.
+          know what to use first, and find recipes
+          for the food you already have.
         </p>
 
         <div class="home-hero-actions">
@@ -162,7 +138,7 @@
 
         <a href="fill-fridge.html" class="home-feature-card feature-green">
           <span class="feature-number">01 / STOCK UP</span>
-          <span class="feature-icon">🥬</span>
+          <img class="feature-icon" src="images/fill-fridge-button.png" alt="">
           <h3>FILL<br>FRIDGE.</h3>
           <p>
             Add your groceries and organize
@@ -173,7 +149,7 @@
 
         <a href="fill-pantry.html" class="home-feature-card feature-cream">
           <span class="feature-number">02 / STORE IT</span>
-          <span class="feature-icon">🥫</span>
+          <img class="feature-icon" src="images/fill-pantry-button.png" alt="">
           <h3>FILL<br>PANTRY.</h3>
           <p>
             Keep track of the food
@@ -184,7 +160,7 @@
 
         <a href="use-by.html" class="home-feature-card feature-red">
           <span class="feature-number">03 / SAVE IT</span>
-          <span class="feature-icon">🍓</span>
+          <img class="feature-icon" src="images/use-by-button.png" alt="">
           <h3>USE<br>BY.</h3>
           <p>
             Find out what needs your
@@ -193,13 +169,13 @@
           <span class="feature-arrow">↗</span>
         </a>
 
-        <a href="buy-list.html" class="home-feature-card feature-dark">
-          <span class="feature-number">04 / SHOP SMART</span>
-          <span class="feature-icon">🛒</span>
-          <h3>BUY<br>LIST.</h3>
+        <a href="what-can-i-make.html" class="home-feature-card feature-dark">
+          <span class="feature-number">04 / COOK IT</span>
+          <span class="feature-icon feature-stamp" aria-hidden="true">WHAT CAN I MAKE?</span>
+          <h3>WHAT CAN<br>I MAKE?</h3>
           <p>
-            Make your grocery list
-            and remember what to buy.
+            Find real recipes that use
+            the food you already have.
           </p>
           <span class="feature-arrow">↗</span>
         </a>
@@ -262,11 +238,21 @@
           <strong id="home-freezer-count">0</strong>
         </div>
 
+        <div class="home-receipt-line">
+          <span>PANTRY ITEMS</span>
+          <strong id="home-pantry-count">0</strong>
+        </div>
+
         <div class="home-receipt-rule"></div>
 
         <div class="home-receipt-line home-receipt-total">
           <span>TOTAL GROCERIES</span>
           <strong id="home-total-count">0</strong>
+        </div>
+
+        <div class="home-receipt-line">
+          <span>USE SOON</span>
+          <strong id="home-soon-count">0</strong>
         </div>
 
         <div class="home-barcode"></div>
@@ -306,7 +292,7 @@
   <footer class="home-footer">
     <span>FRESH'D © 2026</span>
     <span>YOUR FRIDGE, YOUR RULES.</span>
-    <a href="about.html">ABOUT FRESH'D ↗</a>
+    <a href="what-can-i-make.html">WHAT CAN I MAKE? ↗</a>
   </footer>
 
 </body>
