@@ -385,3 +385,61 @@
   object-fit: contain;
   padding: 30px;
 }
+
+/* ---------- KITCHEN TOOLS ---------- */
+
+.tool-picker {
+  margin: 18px 0 14px;
+  padding: 0;
+  border: 0;
+}
+
+.tool-picker legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.tool-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Each checkbox looks like a pill you can tap */
+.tool-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 6px 12px;
+  border: 1px solid #8d8170;
+  border-radius: 99px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tool-option:has(input:checked) {
+  background: var(--black);
+  color: var(--cream);
+  border-color: var(--black);
+}
+
+.tool-option input {
+  accent-color: var(--green);
+}
+
+.recipes-receipt label[for="tool-select"] {
+  margin-top: 6px;
+}
+
+/* Tool tags on recipe cards */
+.tags.tools li {
+  border: 1px solid #777;
+}
+
+.tags.tools li.no-tool {
+  border: 1px dashed var(--yellow);
+  color: var(--yellow);
+}

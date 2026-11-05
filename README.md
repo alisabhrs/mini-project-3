@@ -25,7 +25,10 @@ People like me who forget what's already in the fridge, buy things twice, or let
 ## How to Use It
 1. **Fill Fridge** or **Fill Pantry**: add your food, with expiration dates if you know them.
 2. **Use By**: see what's expired, what to use soon, and what's still fresh.
-3. **What Can I Make?**: pick an ingredient (the one expiring soonest is pre-selected) and press **Find Recipes**.
+3. **What Can I Make?**: pick an ingredient (the one expiring soonest is pre-selected).
+   - Tick the **kitchen tools** you own. Fresh'd remembers them.
+   - Optionally choose **Use this tool** (e.g. Blender) to see only recipes that use it.
+   - Press **Find Recipes**.
 4. Read each card's match %, what you have, and what you need. Press **Show recipe** for amounts and steps.
 
 > The match % compares ingredient **names** only. It doesn't check whether you have enough of each.
@@ -39,6 +42,7 @@ For example, Spinach Omelette needs Eggs, Spinach, and Feta. You have 2 of the 3
   - Lowercase and singular ("Eggs" matches "Egg").
   - Whole words only ("Cheese" matches "Cheddar Cheese", but "Egg" doesn't match "Eggplant").
   - Expired food doesn't count.
+- **Tools:** TheMealDB doesn't list equipment, so Fresh'd looks for words like "blend" or "bake" in the instructions. It's a best guess.
 - **Ranking:** highest % first. On a tie, the recipe that uses more "use soon" food comes first.
 
 ## Changes from Mini Project 2

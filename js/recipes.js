@@ -21,6 +21,120 @@ const select = document.getElementById("ingredient-select");
 const findButton = document.getElementById("find-button");
 const statusBox = document.getElementById("recipe-status");
 const results = document.getElementById("recipe-results");
+const toolBoxes = document.getElementById("tool-checkboxes");
+const toolSelect = document.getElementById("tool-select");
+
+// The last recipes we downloaded. Kept so the page can re-score and
+// re-filter them (when tools or inventory change) without fetching again.
+let lastMeals = null;
+let lastIngredient = "";
+
+
+/* -----------------------------------------
+   KITCHEN TOOLS
+   TheMealDB has no "equipment" field, so we look for these words in
+   each recipe's instructions. It's a best guess, not a guarantee.
+----------------------------------------- */
+
+const TOOLS_KEY = "freshd-tools-v1";
+
+const KITCHEN_TOOLS = [
+  { id: "stove",      name: "Stove",          words: ["stove", "hob", "saucepan", "frying pan", "pan", "skillet", "wok", "simmer", "boil", "fry", "saute"] },
+  { id: "oven",       name: "Oven",           words: ["oven", "bake", "baked", "baking", "roast", "preheat"] },
+  { id: "microwave",  name: "Microwave",      words: ["microwave"] },
+  { id: "air-fryer",  name: "Air fryer",      words: ["air fryer", "air-fryer", "airfryer"] },
+  { id: "blender",    name: "Blender",        words: ["blender", "blend", "blitz", "liquidise", "liquidize", "puree"] },
+  { id: "processor",  name: "Food processor", words: ["food processor", "processor"] },
+  { id: "mixer",      name: "Mixer",          words: ["mixer", "electric whisk", "beaters"] },
+  { id: "slow-cooker", name: "Slow cooker",   words: ["slow cooker", "crockpot", "crock pot"] },
+  { id: "grill",      name: "Grill / BBQ",    words: ["barbecue", "bbq", "grill"] }
+];
+
+// Which tools the user said they own, e.g. ["stove", "blender"]
+function loadMyTools() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(TOOLS_KEY));
+    return Array.isArray(saved) ? saved : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveMyTools(ids) {
+  try {
+    localStorage.setItem(TOOLS_KEY, JSON.stringify(ids));
+  } catch {
+    // If storage is full the choice just isn't remembered.
+  }
+}
+
+function toolName(id) {
+  const tool = KITCHEN_TOOLS.find(tool => tool.id === id);
+  return tool ? tool.name : id;
+}
+
+// "Oven" → "an Oven", "Blender" → "a Blender"
+function withArticle(name) {
+  return (/^[aeiou]/i.test(name) ? "an " : "a ") + name;
+}
+
+// Read a recipe's instructions and return the tool ids it mentions.
+// \b means "word boundary", so "pan" does not match "pancake".
+function detectTools(meal) {
+  const text = String(meal.strInstructions || "").toLowerCase();
+
+  return KITCHEN_TOOLS
+    .filter(tool => tool.words.some(word =>
+      new RegExp("\\b" + word + "\\b").test(text)
+    ))
+    .map(tool => tool.id);
+}
+
+// Build the "What tools do you have?" checkboxes.
+function buildToolCheckboxes() {
+  const myTools = loadMyTools();
+
+  KITCHEN_TOOLS.forEach(tool => {
+    const label = document.createElement("label");
+    label.className = "tool-option";
+
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.value = tool.id;
+    box.checked = myTools.includes(tool.id);
+
+    label.append(box, tool.name);
+    toolBoxes.append(label);
+  });
+
+  // When a box changes: save, update the "Use this tool" list,
+  // and redraw any recipes already on screen.
+  toolBoxes.addEventListener("change", () => {
+    const checked = [...toolBoxes.querySelectorAll("input:checked")]
+      .map(box => box.value);
+
+    saveMyTools(checked);
+    fillToolDropdown();
+    renderResults();
+  });
+
+  fillToolDropdown();
+}
+
+// "Use this tool" only lists the tools the user owns.
+function fillToolDropdown() {
+  const myTools = loadMyTools();
+  const previous = toolSelect.value;
+
+  toolSelect.replaceChildren(new Option("Any tool", ""));
+
+  KITCHEN_TOOLS
+    .filter(tool => myTools.includes(tool.id))
+    .forEach(tool => toolSelect.append(new Option(tool.name, tool.id)));
+
+  // Keep the old choice if that tool is still owned.
+  toolSelect.value = myTools.includes(previous) ? previous : "";
+}
 
 
 /* -----------------------------------------
@@ -153,7 +267,9 @@ function scoreRecipe(meal, inventory) {
     ? Math.round((have.length / ingredients.length) * 100)
     : 0;
 
-  return { meal, ingredients, have, missing, score, useSoonCount };
+  const tools = detectTools(meal);
+
+  return { meal, ingredients, have, missing, score, useSoonCount, tools };
 }
 
 // Highest score first. If two scores tie, the recipe that uses
@@ -266,7 +382,7 @@ function makeTagList(names, className, emptyText) {
 // We use textContent (never innerHTML) so text from the API
 // can't add unexpected HTML to the page.
 function createRecipeCard(result) {
-  const { meal, ingredients, have, missing, score, useSoonCount } = result;
+  const { meal, ingredients, have, missing, score, useSoonCount, tools } = result;
 
   const card = document.createElement("article");
   card.className = "recipe-card";
@@ -328,6 +444,26 @@ function createRecipeCard(result) {
     makeTagList(missing, "need", "Nothing. You have it all!")
   );
 
+  // TOOLS: what the instructions mention. If the user has ticked
+  // their tools, flag the ones they don't own.
+  const myTools = loadMyTools();
+  const toolLabel = document.createElement("p");
+  toolLabel.className = "list-label";
+  toolLabel.textContent = "TOOLS MENTIONED";
+
+  const toolList = makeTagList([], "tools", "None mentioned");
+  if (tools.length) toolList.replaceChildren();
+
+  tools.forEach(id => {
+    const item = document.createElement("li");
+    const dontOwn = myTools.length > 0 && !myTools.includes(id);
+    item.textContent = dontOwn ? `${toolName(id)} (you don't have)` : toolName(id);
+    if (dontOwn) item.className = "no-tool";
+    toolList.append(item);
+  });
+
+  body.append(toolLabel, toolList);
+
   // "Show recipe" fold-out with amounts and instructions
   const details = document.createElement("details");
   const summary = document.createElement("summary");
@@ -356,17 +492,45 @@ function createRecipeCard(result) {
   return card;
 }
 
-function showRecipes(ranked, ingredientName) {
+// Score, rank, filter by tool, and draw the last downloaded recipes.
+// Called after a search AND whenever tools or inventory change,
+// so the page stays up to date without fetching again.
+function renderResults() {
+  if (!lastMeals) return;
+
+  const inventory = getUsableInventory();
+  const ranked = rankRecipes(lastMeals.map(meal => scoreRecipe(meal, inventory)));
+
+  // "Use this tool": keep only recipes whose instructions mention it.
+  const chosenTool = toolSelect.value;
+  const visible = chosenTool
+    ? ranked.filter(result => result.tools.includes(chosenTool))
+    : ranked;
+
   results.replaceChildren();
+
+  // EMPTY STATE (no recipes use the chosen tool)
+  if (visible.length === 0) {
+    showStatus(
+      "empty",
+      `No ${lastIngredient} recipes mention ${withArticle(toolName(chosenTool)).toLowerCase()}`,
+      `We checked ${ranked.length} recipes. Choose "Any tool" or another tool to see more.`
+    );
+    return;
+  }
+
+  // IN-USE STATE
+  showStatus(null);
 
   const note = document.createElement("p");
   note.className = "results-note";
   note.textContent =
-    `${ranked.length} RECIPES WITH ${ingredientName.toUpperCase()}, BEST MATCH FIRST. ` +
-    "MATCH % COMPARES INGREDIENT NAMES, NOT AMOUNTS.";
+    `${visible.length} RECIPE${visible.length === 1 ? "" : "S"} WITH ${lastIngredient.toUpperCase()}` +
+    (chosenTool ? ` USING ${withArticle(toolName(chosenTool)).toUpperCase()}` : "") +
+    ", BEST MATCH FIRST. MATCH % COMPARES INGREDIENT NAMES, NOT AMOUNTS.";
   results.append(note);
 
-  ranked.forEach(result => results.append(createRecipeCard(result)));
+  visible.forEach(result => results.append(createRecipeCard(result)));
 }
 
 
@@ -377,6 +541,7 @@ function showRecipes(ranked, ingredientName) {
 async function findRecipes(ingredientName) {
   // LOADING STATE
   findButton.disabled = true;
+  lastMeals = null;
   results.replaceChildren();
   showStatus("loading", "Finding recipes…", `Looking for recipes that use ${ingredientName}.`);
 
@@ -398,14 +563,10 @@ async function findRecipes(ingredientName) {
     const first = matches.slice(0, MAX_RECIPES);
     const meals = await Promise.all(first.map(meal => lookupRecipe(meal.idMeal)));
 
-    const inventory = getUsableInventory();
-    const scored = meals
-      .filter(meal => meal)                         // skip any missing recipe
-      .map(meal => scoreRecipe(meal, inventory));
-
-    // IN-USE STATE
-    showStatus(null);
-    showRecipes(rankRecipes(scored), ingredientName);
+    // Remember these so tool/inventory changes can redraw them.
+    lastMeals = meals.filter(meal => meal);        // skip any missing recipe
+    lastIngredient = ingredientName;
+    renderResults();
 
   } catch (error) {
     // ERROR STATE
@@ -432,6 +593,7 @@ form.addEventListener("submit", event => {
 
   // INVALID INPUT STATE
   if (!ingredientName) {
+    lastMeals = null;
     results.replaceChildren();
     showStatus("invalid", "Choose an ingredient first", "Pick something from your kitchen in the list, then press Find Recipes.");
     select.focus();
@@ -446,19 +608,52 @@ form.addEventListener("submit", event => {
    6. START
 ----------------------------------------- */
 
-const startingInventory = getUsableInventory();
+// Read the inventory and (re)build the ingredient list.
+// Runs on load, when you come back to this page, and when the
+// inventory changes in another tab, so the list is never out of date.
+function setUpIngredients() {
+  const inventory = getUsableInventory();
+  const previous = select.value;
 
-if (startingInventory.length === 0) {
-  // EMPTY STATE (no inventory)
-  findButton.disabled = true;
-  showStatus(
-    "empty",
-    "Your kitchen is empty",
-    "Add some food to your fridge or pantry first, and Fresh'd will find recipes that use it.",
-    [["fill-fridge.html", "+ FILL FRIDGE ↗"], ["fill-pantry.html", "+ FILL PANTRY ↗"]]
-  );
-} else {
-  // EMPTY STATE (before searching)
-  fillDropdown(startingInventory);
-  showStatus("empty", "Ready when you are", "Pick an ingredient and press Find Recipes.");
+  select.replaceChildren(new Option("Choose an ingredient", ""));
+
+  if (inventory.length === 0) {
+    // EMPTY STATE (no inventory)
+    findButton.disabled = true;
+    lastMeals = null;
+    results.replaceChildren();
+    showStatus(
+      "empty",
+      "Your kitchen is empty",
+      "Add some food to your fridge or pantry first, and Fresh'd will find recipes that use it.",
+      [["fill-fridge.html", "+ FILL FRIDGE ↗"], ["fill-pantry.html", "+ FILL PANTRY ↗"]]
+    );
+    return;
+  }
+
+  findButton.disabled = false;
+  fillDropdown(inventory);
+
+  // Keep the user's choice if that food is still in the kitchen.
+  if ([...select.options].some(option => option.value === previous && previous)) {
+    select.value = previous;
+  }
+
+  if (lastMeals) {
+    renderResults();   // re-score the recipes on screen with the new inventory
+  } else {
+    // EMPTY STATE (before searching)
+    showStatus("empty", "Ready when you are", "Pick an ingredient and press Find Recipes.");
+  }
 }
+
+buildToolCheckboxes();
+toolSelect.addEventListener("change", renderResults);
+
+setUpIngredients();
+window.addEventListener("pageshow", event => {
+  if (event.persisted) setUpIngredients();   // came back with the Back button
+});
+window.addEventListener("storage", event => {
+  if (event.key === window.FreshdInventory.key) setUpIngredients();
+});

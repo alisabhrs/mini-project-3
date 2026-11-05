@@ -49,7 +49,20 @@
           <select id="ingredient-select">
             <option value="">Choose an ingredient</option>
           </select>
-          <p class="receipt-help">Food that expires soonest is listed first. Expired food is left out.</p>
+          <p class="receipt-help">Food that expires soonest is listed first. Expired food is left out. This list updates when your inventory changes.</p>
+
+          <fieldset class="tool-picker">
+            <legend>02 / WHAT TOOLS DO YOU HAVE?</legend>
+            <!-- Checkboxes are added by JavaScript from the KITCHEN_TOOLS list -->
+            <div id="tool-checkboxes" class="tool-grid"></div>
+            <p class="receipt-help">Saved for next time.</p>
+          </fieldset>
+
+          <label for="tool-select">03 / USE THIS TOOL…</label>
+          <select id="tool-select">
+            <option value="">Any tool</option>
+          </select>
+          <p class="receipt-help">Tools are found by reading each recipe's instructions (e.g. "blend", "bake"), so this is a best guess.</p>
 
           <button type="submit" id="find-button" class="recipes-submit">FIND RECIPES ↗</button>
         </form>

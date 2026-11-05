@@ -23,6 +23,9 @@ Turn Fresh'd from a kitchen inventory tracker into an inventory **and** recipe d
 2. A dropdown lists the user's inventory items. Expired items are left out, and the item that expires soonest is pre-selected and marked "use soon".
 3. The user presses **Find Recipes**.
 4. Results appear as ranked recipe cards. Each card can be expanded to read the instructions.
+5. **Kitchen tools:** the user ticks the tools they own (stove, oven, microwave, air fryer, blender, food processor, mixer, slow cooker, grill/BBQ). The choice is saved in `localStorage` (`freshd-tools-v1`).
+6. **Use this tool:** the user can pick one of their tools. Only recipes whose instructions mention it are shown.
+7. **Live inventory:** the ingredient list and on-screen recipes update when the inventory changes, either in another tab or when returning with the Back button.
 
 ## 5. API Integration
 - Base URL: `https://www.themealdb.com/api/json/v1/1/`. Free test key `1`, nothing secret.
@@ -40,8 +43,9 @@ Turn Fresh'd from a kitchen inventory tracker into an inventory **and** recipe d
    - Example: "cheese" matches "Cheddar Cheese".
    - Example: "egg" does **not** match "Eggplant".
 4. **Match score** = `Math.round(owned / total × 100)`.
-5. **Sort:** highest score first. On a tie, the recipe using more "use soon" or expiring inventory items comes first.
-6. **Labels:** the card states "4 of 5 ingredients", lists have and missing items, and says this is a name match, not a quantity check.
+5. **Tools:** TheMealDB has no equipment field, so tools are detected by whole-word keywords in `strInstructions` ("blend" → Blender, "bake"/"preheat" → Oven). It's a best guess. Cards list the tools mentioned and flag ones the user doesn't own.
+6. **Sort:** highest score first. On a tie, the recipe using more "use soon" or expiring inventory items comes first.
+7. **Labels:** the card states "4 of 5 ingredients", lists have and missing items, and says this is a name match, not a quantity check.
 
 ## 7. Required Interface States
 | State | When | What the user sees |
@@ -52,6 +56,7 @@ Turn Fresh'd from a kitchen inventory tracker into an inventory **and** recipe d
 | Loading | Requests in progress | "Finding recipes…" message. Button disabled |
 | Error | Offline, network failure, or `!response.ok` | Plain-language message plus "check your connection and try again". Button re-enabled |
 | Invalid input | User submits with no ingredient selected | "Choose an ingredient first." Focus moves to the dropdown |
+| Empty (no recipes with chosen tool) | None of the looked-up recipes mention the chosen tool | "No eggs recipes mention a blender." Suggests "Any tool" |
 | In use | Recipes found | Ranked recipe cards with score, have/missing lists, and instructions |
 
 ## 8. Functional Requirements
