@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fill Fridge | Fresh'd</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fill-fridge.css">
+
+  <script src="js/fill-fridge.js" defer></script>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="site-header">
+    <nav class="sticker-nav" aria-label="Main navigation">
+      <a href="fill-fridge.html" aria-current="page"><img src="images/fill-fridge-button.png" alt="Fill Fridge"></a>
+      <a href="fill-pantry.html"><img src="images/fill-pantry-button.png" alt="Fill Pantry"></a>
+      <a href="index.html" class="brand"><img src="images/freshd-logo.png" alt="Fresh'd Home"></a>
+      <a href="use-by.html"><img src="images/use-by-button.png" alt="Use By"></a>
+      <a href="what-can-i-make.html" class="nav-stamp"><span>What can I <strong>make?</strong></span></a>
+    </nav>
+  </header>
+
+
+  <main class="fridge-page">
+
+    <!-- ADD ITEMS / ORGANIZE BUTTONS -->
+    <div class="mode-switch" role="group" aria-label="Fridge mode">
+
+      <button
+        type="button"
+        id="add-mode-btn"
+        class="mode-btn active"
+        aria-pressed="true">
+        + ADD ITEMS
+      </button>
+
+      <button
+        type="button"
+        id="organize-mode-btn"
+        class="mode-btn organize-btn"
+        aria-pressed="false">
+        ▦ ORGANIZE
+      </button>
+
+    </div>
+
+
+    <div class="fridge-layout">
+
+      <!-- LEFT: RECEIPT FORM -->
+      <section class="receipt-panel" id="receipt-panel">
+
+        <div class="receipt-header">
+          <h1>* FRESH'D *</h1>
+          <p>ADD AN ITEM TO YOUR FRIDGE</p>
+        </div>
+
+        <form id="food-form">
+
+          <label for="food-category">CATEGORY *</label>
+          <select id="food-category" required>
+            <option value="">Select category</option>
+            <option value="Fruit">Fruit</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Dairy">Dairy & Eggs</option>
+            <option value="Meat">Meat & Seafood</option>
+            <option value="Drinks">Drinks</option>
+            <option value="Frozen">Frozen Foods</option>
+            <option value="Snacks">Snacks</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label for="food-name">ITEM NAME *</label>
+          <input
+            type="text"
+            id="food-name"
+            placeholder="e.g. Strawberries"
+            required
+          >
+
+          <label for="food-brand">BRAND (OPTIONAL)</label>
+          <input
+            type="text"
+            id="food-brand"
+            placeholder="e.g. Driscoll's"
+          >
+
+          <div class="form-row">
+
+            <div>
+              <label for="food-quantity">QUANTITY *</label>
+              <input
+                type="number"
+                id="food-quantity"
+                min="1"
+                value="1"
+                required
+              >
+            </div>
+
+           
+<div class="date-section">
+
+  <label for="date-type">DATE TYPE</label>
+
+  <select id="date-type">
+    <option value="expiration">Expiration Date</option>
+    <option value="purchased">Purchase Date</option>
+    <option value="production">Production Date</option>
+    <option value="none">No Date</option>
+  </select>
+
+  <div id="date-input-container">
+    <label for="food-date" id="date-label">
+      EXPIRATION DATE
+    </label>
+
+    <input type="date" id="food-date">
+  </div>
+
+</div>
+
+
+          </div>
+
+          <label for="storage">STORAGE *</label>
+          <select id="storage" required>
+            <option value="fridge">Fridge</option>
+            <option value="freezer">Freezer</option>
+          </select>
+
+          <button type="submit" class="receipt-submit">
+            + ADD TO FRIDGE
+          </button>
+
+        </form>
+
+        <div class="receipt-footer">
+          <p>THANK YOU FOR KEEPING IT FRESH!</p>
+          <div class="barcode" aria-hidden="true"></div>
+        </div>
+
+      </section>
+
+
+      <!-- MIDDLE: YOUR STOCK -->
+      <section class="stock-panel" id="stock-panel">
+
+        <div class="stock-heading">
+          <h2>YOUR STOCK</h2>
+          <span id="stock-count">0</span>
+        </div>
+
+        <div class="stock-filters" role="group" aria-label="Filter stock">
+          <button type="button" class="filter-btn active" data-filter="all">
+            ALL
+          </button>
+
+          <button type="button" class="filter-btn" data-filter="fridge">
+            FRIDGE
+          </button>
+
+          <button type="button" class="filter-btn" data-filter="freezer">
+            FREEZER
+          </button>
+        </div>
+
+        <p class="organize-instructions" id="organize-instructions" hidden>
+          Drag your food onto a shelf to organize your fridge!
+        </p>
+
+        <div id="stock-list" class="stock-list" aria-live="polite">
+          <!-- Food items appear here through JavaScript -->
+        </div>
+
+        <button type="button" id="add-another-btn" class="add-another-btn">
+          + ADD ANOTHER ITEM
+        </button>
+
+      </section>
+
+
+      <!-- RIGHT: FRIDGE -->
+      <section class="fridge-panel" aria-label="Interactive refrigerator">
+
+        <div class="fridge-view-buttons" role="group" aria-label="Fridge view">
+
+          <button type="button" data-view="closed">
+            CLOSED
+          </button>
+
+          <button type="button" data-view="fridge" class="active">
+            FRIDGE
+          </button>
+
+          <button type="button" data-view="freezer">
+            FREEZER
+          </button>
+
+          <button type="button" data-view="both">
+            BOTH
+          </button>
+
+        </div>
+
+        <div class="fridge-container" id="fridge-container">
+
+          <img
+            id="fridge-image"
+            src="images/fridge-opened.png"
+            alt="Open stainless steel refrigerator"
+            draggable="false"
+          >
+
+          <!-- Shelf drop zones -->
+          <div class="drop-zone shelf-top"
+               data-shelf="top"
+               aria-label="Top shelf"></div>
+
+          <div class="drop-zone shelf-middle"
+               data-shelf="middle"
+               aria-label="Middle shelf"></div>
+
+          <div class="drop-zone shelf-bottom"
+               data-shelf="bottom"
+               aria-label="Bottom shelf"></div>
+
+          <div class="drop-zone shelf-freezer"
+               data-shelf="freezer"
+               aria-label="Freezer drawer"></div>
+
+        </div>
+
+        <p class="fridge-hint">
+          YOUR FRIDGE, YOUR RULES.
+        </p>
+
+      </section>
+
+    </div>
+
+  </main>
+
+</body>
+</html>

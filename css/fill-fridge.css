@@ -1,0 +1,570 @@
+
+/* FRESH'D — FILL FRIDGE LAYOUT FIX */
+
+.fridge-page {
+    width: min(100%, 1500px);
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+    box-sizing: border-box;
+}
+
+.fridge-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.5fr);
+    align-items: start;
+    gap: 20px;
+    width: 100%;
+}
+
+.receipt-panel,
+.stock-panel,
+.fridge-panel {
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.receipt-panel {
+    background: #f2e2c7;
+    color: #111;
+    padding: 28px 22px;
+    border-radius: 4px;
+}
+
+.receipt-panel form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.receipt-panel input,
+.receipt-panel select {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 11px;
+    box-sizing: border-box;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 12px;
+}
+
+.form-row > div {
+    min-width: 0;
+}
+
+.stock-panel {
+    background: #050505;
+    color: white;
+    border: 1px solid #777;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.fridge-panel {
+    width: 100%;
+}
+
+.fridge-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+}
+
+#fridge-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.mode-switch {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 22px;
+    gap: 0;
+}
+
+.mode-btn {
+    padding: 12px 24px;
+    border: 0;
+    cursor: pointer;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+}
+
+/* Unselected mode: cream. Selected mode (.active, set by JS): red. */
+.mode-btn {
+    background: var(--cream);
+    color: var(--black);
+}
+
+.mode-btn.active {
+    background: var(--red);
+    color: white;
+}
+
+#add-mode-btn {
+    border-radius: 30px 0 0 30px;
+}
+
+#organize-mode-btn {
+    border-radius: 0 30px 30px 0;
+}
+
+/* Filter + fridge view buttons (were plain browser buttons) */
+.filter-btn,
+.fridge-view-buttons button {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid #777;
+    border-radius: 999px;
+    padding: 9px 14px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+}
+
+.fridge-page {
+    font-family: "Courier New", monospace;
+}
+
+/* Kept from the old stylesheet that used to be on line 1 */
+.stock-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.receipt-submit {
+    width: 100%;
+    background: #050505;
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    padding: 17px 8px;
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.receipt-footer {
+    text-align: center;
+    border-top: 1px dashed #555;
+    margin-top: 18px;
+    padding-top: 17px;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.barcode {
+    height: 39px;
+    width: 72%;
+    margin: 12px auto;
+    background: repeating-linear-gradient(90deg, #000 0 3px, transparent 3px 5px, #000 5px 6px, transparent 6px 10px, #000 10px 14px, transparent 14px 17px);
+}
+
+@media (max-width: 1000px) {
+    .fridge-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .fridge-panel {
+        grid-column: 1 / -1;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 650px) {
+    .fridge-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .fridge-panel {
+        grid-column: auto;
+    }
+
+    .fridge-page {
+        padding: 16px;
+    }
+}
+
+
+/* FRESH'D — UPDATED FILL FRIDGE PROPORTIONS */
+
+.fridge-page {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 30px 60px;
+    box-sizing: border-box;
+}
+
+/* Smaller receipt, wider stock, larger fridge */
+.fridge-layout {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 0.8fr)
+        minmax(0, 1.15fr)
+        minmax(0, 1.55fr);
+    gap: 20px;
+    align-items: start;
+}
+
+/* RECEIPT */
+.receipt-panel {
+    width: 100%;
+    min-width: 0;
+    padding: 24px 18px;
+    box-sizing: border-box;
+}
+
+.receipt-header h1 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.receipt-panel label {
+    font-size: 13px;
+}
+
+.receipt-panel input,
+.receipt-panel select {
+    font-size: 13px;
+    padding: 10px;
+}
+
+/* STOCK */
+.stock-panel {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    min-height: 600px;
+}
+
+/* FRIDGE */
+.fridge-panel {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.fridge-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+#fridge-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Keep navigation above page content */
+.site-header {
+    position: relative;
+    z-index: 10;
+}
+
+/* Place mode buttons below navigation */
+.mode-switch {
+    position: relative;
+    z-index: 1;
+    margin: 10px auto 24px;
+}
+
+/* FRIDGE VIEW BUTTONS */
+.fridge-view-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.fridge-view-buttons button {
+    padding: 9px 12px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* TABLET */
+@media (max-width: 1050px) {
+    .fridge-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .fridge-panel {
+        grid-column: 1 / -1;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 650px) {
+    .fridge-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .fridge-panel {
+        grid-column: auto;
+    }
+
+    .stock-panel {
+        min-height: 350px;
+    }
+
+}
+
+/* BUTTON INTERACTIONS */
+
+.receipt-panel[hidden],
+.organize-instructions[hidden],
+#stock-list [hidden] {
+    display: none !important;
+}
+
+.fridge-layout:has(.stock-panel.organize-mode) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+}
+
+.stock-panel.organize-mode {
+    grid-column: 1;
+}
+
+.fridge-layout:has(.stock-panel.organize-mode) .fridge-panel {
+    grid-column: 2;
+}
+
+.mode-btn,
+.filter-btn,
+.fridge-view-buttons button {
+    cursor: pointer;
+}
+
+.fridge-view-buttons button.active {
+    background: #b31512;
+    color: white;
+    border-color: #b31512;
+}
+
+.filter-btn.active {
+    background: white;
+    color: black;
+}
+
+.mode-switch {
+    transform: translateX(-10px);
+}
+
+/* ==========================================
+   FRESH'D — YOUR STOCK CARD DESIGN FIX
+   ========================================== */
+
+.stock-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.stock-item {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding: 16px;
+    background: #101010;
+    border: 1px solid #555;
+    border-radius: 12px;
+    color: #fff;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.food-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    width: 44px;
+    height: 44px;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.food-details {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    width: 100%;
+}
+
+.food-details strong {
+    display: block;
+    font-size: 16px;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+    margin-bottom: 6px;
+}
+
+.food-meta {
+    display: block;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #bbb;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.food-actions {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+}
+
+.food-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 9px 6px;
+    background: transparent;
+    border: 1px solid #777;
+    border-radius: 5px;
+    color: white;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.food-actions button:hover {
+    background: #b31512;
+    border-color: #b31512;
+    color: white;
+}
+
+.food-picture {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.stock-item.selected {
+    border-color: #b31512;
+}
+
+.stock-empty {
+    padding: 35px 10px;
+    text-align: center;
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* Extra stock buttons */
+
+.add-another-btn,
+.clear-stock-btn {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    padding: 10px 12px;
+    margin-top: 14px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.clear-stock-btn {
+    background: transparent;
+    color: #ddd;
+    border: 1px solid #777;
+    border-radius: 4px;
+}
+
+.clear-stock-btn:hover {
+    background: #b31512;
+    border-color: #b31512;
+    color: white;
+}
+
+/* DRAGGABLE FOOD INSIDE FRIDGE */
+
+#fridge-container {
+    position: relative;
+}
+
+#placed-foods {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.placed-food {
+    position: absolute;
+    pointer-events: auto;
+    cursor: grab !important;
+    touch-action: none;
+    user-select: none;
+    z-index: 6;
+}
+
+.placed-food:active {
+    cursor: grabbing !important;
+    transform: translate(-50%, -50%) scale(1.15) !important;
+}
+
+.drop-zone {
+    z-index: 2;
+}
+
+.drop-zone.drag-over {
+    outline: 2px dashed #b31512;
+    background: rgba(179, 21, 18, 0.15);
+}
+
+/* DATE TYPE SELECTOR */
+
+.date-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.date-section select,
+.date-section input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+#date-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#date-input-container[hidden] {
+    display: none !important;
+}
+
+.date-section label {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
