@@ -1,52 +1,63 @@
-# Mini Project 3 Proposal: Fresh'd — What Can I Make?
+# Proposal: Fresh'd Recipe Matching
 
-> **DRAFT. Alisa: rewrite this in your own words before submitting.**
-> Sentences marked ✍️ are copied or adapted from your Mini Project 2 proposal and README.
-> Items marked 🔎 must be checked by you in the browser before this is final.
+## What I am building
+I wish I had a tool that looks up recipes and helps me figure out what I can cook with the ingredients I already have at home, while also helping me use food before it expires.
 
-## What I Am Building
-✍️ Fresh'd is my kitchen inventory website that helps me keep track of the food I have in my fridge, freezer, and pantry, and know what to use before it expires.
+I want to expand my Mini Project 2 website, Fresh'd, by adding a recipe recommendation feature that connects to my existing kitchen inventory.
 
-For Mini Project 3 I am adding **What Can I Make?**. It takes the ingredients already saved in Fresh'd, finds real recipes from an API, and works out how much of each recipe I can already make with what I have.
+## Who it is for
+Me, and anyone who wants to keep track of their kitchen inventory and figure out what to cook with the ingredients they already have.
 
-## Who It Is For
-✍️ This is for people like me who sometimes forget what food they already have in their fridge. It can be annoying to buy something twice or find ingredients that have already expired.
+I sometimes forget what ingredients I have, especially in the fridge or pantry. Food ends up expiring before I use it, and sometimes I buy things I already have. I also find it annoying when I want to cook something but don't know what to make with the ingredients I already own.
 
-It is also for anyone who opens the fridge and doesn't know what to cook with what's inside.
+## The API
+**API:** TheMealDB
 
-## API
-- **Name:** TheMealDB (free test key `1`, no private API key needed)
-- **Documentation:** https://www.themealdb.com/api.php
-- **Tested URLs** 🔎 (open these and confirm the response):
-  - https://www.themealdb.com/api/json/v1/1/filter.php?i=egg
-  - https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772
-- **Fields I use:**
-  - From `filter.php`: `idMeal`, `strMeal`, `strMealThumb`
-  - From `lookup.php`: `strMeal`, `strMealThumb`, `strCategory`, `strInstructions`, `strIngredient1` to `strIngredient20`, `strMeasure1` to `strMeasure20`
+**Documentation:** https://www.themealdb.com/api.php
 
-## What the User Chooses
-- **Ingredients:** the user picks 1 to 5 ingredients from their own Fresh'd inventory, such as eggs and spinach. Fresh'd pre-selects the item that expires soonest.
-- **Kitchen tools:** the user ticks the tools they own (stove, oven, air fryer, blender, …) and can choose one tool to cook with. Only recipes whose instructions mention that tool are shown.
+**Example API URL to open and test:**
+https://www.themealdb.com/api/json/v1/1/search.php?s=chicken
 
-## What the Page Calculates
-For each recipe:
+**Fields I will use:**
 
-**Match score = ingredients I have ÷ ingredients the recipe needs × 100**
+* `idMeal` — recipe ID
+* `strMeal` — recipe name
+* `strMealThumb` — recipe image
+* `strCategory` — food category
+* `strIngredient1` to `strIngredient20` — ingredients needed
+* `strMeasure1` to `strMeasure20` — ingredient measurements
+* `strInstructions` — cooking instructions
 
-Recipes are ranked from highest to lowest match. If two recipes tie, the one that uses more of the ingredients I picked comes first, then the one that uses more of my "use soon" food.
+I plan to use the API to find recipes and compare their ingredients with the food saved in Fresh'd.
 
-The score only compares ingredient names. It does not check whether I have enough of each one.
+## What the user chooses
+I want users to be able to choose an ingredient from their existing inventory to search for recipes.
+
+They should also be able to look through recipe recommendations, see which ingredients they already have, and possibly filter by food category.
+
+## What the page works out
+Fresh'd will compare the ingredients needed for each recipe with the ingredients saved in the user's kitchen inventory.
+
+It will calculate a match percentage using:
+
+**Match Score = (Ingredients I have ÷ Total ingredients needed) × 100**
+
+For example, if a recipe requires 5 ingredients and I already have 4, the match score would be 80%.
+
+The website will rank recipes from the highest match percentage to the lowest and show which ingredients are missing.
+
+If possible, I also want it to prioritize recipes that use ingredients that are about to expire, especially when two recipes have similar match scores.
 
 ## Features
-1. **Kitchen Inventory:** keep track of fridge, freezer, and pantry food (from Mini Project 2).
-2. **Recipe Discovery:** find real recipes from TheMealDB using an ingredient I own.
-3. **Ingredient Match Score:** a percentage for how much of the recipe I already have.
-4. **Have / Missing Ingredients:** see exactly what I still need to buy.
-5. **Expiration-Aware Ranking:** food that expires soon is suggested first and breaks ties.
+1. **Kitchen inventory:** Keep track of food in my fridge, freezer, and pantry using my existing Fresh'd website.
+2. **Recipe discovery:** Search for recipes using ingredients from my inventory through TheMealDB API.
+3. **Recipe match score:** Calculate how many of the required ingredients I already have and show a match percentage.
+4. **Missing ingredients:** Show which ingredients I already have and which ones I would need to buy.
+5. **Expiration-based recommendations:** Suggest recipes that use ingredients that are close to expiring, if I can get this feature working.
 
-## What I Do Not Know Yet
-- Whether TheMealDB's ingredient names will match the names I type in Fresh'd ("Eggs" vs "Egg").
-- How to wait for several recipe requests at the same time without making the page slow.
-- How to show a helpful error when the internet is off.
-- 🔎 Whether the free API can search for more than one ingredient at once. I think it can't, so I plan to search each picked ingredient separately and combine the results.
-- How well I can tell which kitchen tools a recipe needs, because TheMealDB doesn't list equipment. I plan to look for words like "blend" or "bake" in the instructions.
+## What I do not know yet
+I think the hardest part will be connecting the API to my existing inventory and figuring out how to compare the ingredients in each recipe with what I already have.
+
+I'm also not very familiar with `fetch()`, `await`, and working with JSON data yet, so understanding how to get the API information and display it on the website might be challenging.
+
+I'm also unsure how to handle ingredient names that are slightly different between my inventory and the API, and how to sort recipes based on their match scores.
