@@ -5,7 +5,7 @@ A vintage grocery store at night: black background, cream receipts, hand-drawn f
 
 ## Assets (reuse, never replace)
 - **Sticker navigation:** `images/*-button.png` (lemon, orange, melon, …) and `images/freshd-logo.png`.
-  - Served from `images/small/`: resized 360px copies of the same art, for speed.
+  - Resized to 400px (stickers) and 1100px (photos) for speed. The full-size originals are in the Mini Project 2 repo.
 - **Fridge photos:** `fridge-closed.png`, `fridge-opened.png`, `freezer-opened.png`, `fridge-and-freezer-opened.png`.
 - **Pantry shelf:** `pantry.png`.
 - **"What Can I Make?" nav item:** no sticker art exists yet, so it uses a round red CSS stamp in the same style as the homepage "OPEN ME!" stamp. Swap in a drawn sticker later if one is made.
