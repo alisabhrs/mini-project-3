@@ -388,13 +388,19 @@
 
 /* ---------- KITCHEN TOOLS ---------- */
 
-.tool-picker {
+.tool-picker,
+.pick-list {
   margin: 18px 0 14px;
   padding: 0;
   border: 0;
 }
 
-.tool-picker legend {
+.pick-list {
+  margin-top: 0;
+}
+
+.tool-picker legend,
+.pick-list legend {
   padding: 0;
   margin-bottom: 8px;
   font-weight: bold;
@@ -407,7 +413,7 @@
   gap: 6px;
 }
 
-/* Each checkbox looks like a pill you can tap */
+/* Each checkbox (ingredients and tools) looks like a pill you can tap */
 .tool-option {
   display: inline-flex;
   align-items: center;

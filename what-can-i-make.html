@@ -45,10 +45,11 @@
         <div class="receipt-rule"></div>
 
         <form id="recipe-form" novalidate>
-          <label for="ingredient-select">01 / COOK WITH…</label>
-          <select id="ingredient-select">
-            <option value="">Choose an ingredient</option>
-          </select>
+          <fieldset class="pick-list">
+            <legend>01 / COOK WITH… (PICK UP TO 5)</legend>
+            <!-- One checkbox per inventory item, added by JavaScript -->
+            <div id="ingredient-checkboxes" class="tool-grid"></div>
+          </fieldset>
           <p class="receipt-help">Food that expires soonest is listed first. Expired food is left out. This list updates when your inventory changes.</p>
 
           <fieldset class="tool-picker">

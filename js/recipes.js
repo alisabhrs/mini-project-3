@@ -13,11 +13,15 @@
 const API_URL = "https://www.themealdb.com/api/json/v1/1/";
 
 // Each recipe needs its own lookup request, so we only look up
-// this many. 1 search + 8 lookups = at most 9 requests per click.
+// this many recipes.
 const MAX_RECIPES = 8;
 
+// The free API searches ONE ingredient per request, so each pick is
+// one search. 5 picks + 8 lookups keeps a click under ~20 requests.
+const MAX_PICKS = 5;
+
 const form = document.getElementById("recipe-form");
-const select = document.getElementById("ingredient-select");
+const ingredientBoxes = document.getElementById("ingredient-checkboxes");
 const findButton = document.getElementById("find-button");
 const statusBox = document.getElementById("recipe-status");
 const results = document.getElementById("recipe-results");
@@ -27,7 +31,7 @@ const toolSelect = document.getElementById("tool-select");
 // The last recipes we downloaded. Kept so the page can re-score and
 // re-filter them (when tools or inventory change) without fetching again.
 let lastMeals = null;
-let lastIngredient = "";
+let lastPicks = [];   // the ingredient names used for that search
 
 
 /* -----------------------------------------
@@ -159,10 +163,13 @@ function bySoonestExpiry(a, b) {
   return daysA - daysB;
 }
 
-// Fill the dropdown with the user's ingredients.
-function fillDropdown(inventory) {
+// One checkbox "pill" per ingredient in the inventory.
+// keepChecked = names that were ticked before, so a refresh doesn't lose them.
+function fillIngredientChoices(inventory, keepChecked) {
   const sorted = [...inventory].sort(bySoonestExpiry);
   const seen = [];
+
+  ingredientBoxes.replaceChildren();
 
   sorted.forEach(item => {
     const name = item.name.trim();
@@ -171,19 +178,36 @@ function fillDropdown(inventory) {
     if (seen.includes(name.toLowerCase())) return;
     seen.push(name.toLowerCase());
 
-    const option = document.createElement("option");
-    option.value = name;
-    option.textContent = window.FreshdInventory.isUseSoon(item)
-      ? `${name} — use soon!`
-      : name;
+    const label = document.createElement("label");
+    label.className = "tool-option";
 
-    select.append(option);
+    const box = document.createElement("input");
+    box.type = "checkbox";
+    box.value = name;
+    box.checked = keepChecked.includes(name);
+
+    const text = window.FreshdInventory.isUseSoon(item) ? `${name} (use soon!)` : name;
+    label.append(box, text);
+    ingredientBoxes.append(label);
   });
 
-  // Pre-select the item that expires soonest, if it has a date.
-  if (sorted.length && window.FreshdInventory.daysUntilExpiry(sorted[0]) !== null) {
-    select.value = sorted[0].name.trim();
+  // Nothing ticked yet? Tick the item that expires soonest, if it has a date.
+  const first = ingredientBoxes.querySelector("input");
+  if (getPicks().length === 0 && first &&
+      window.FreshdInventory.daysUntilExpiry(sorted[0]) !== null) {
+    first.checked = true;
   }
+}
+
+// The ingredient names the user ticked, e.g. ["Eggs", "Spinach"]
+function getPicks() {
+  return [...ingredientBoxes.querySelectorAll("input:checked")].map(box => box.value);
+}
+
+// ["eggs"] → "eggs",  ["eggs", "spinach", "feta"] → "eggs, spinach and feta"
+function listText(names) {
+  if (names.length <= 1) return names.join("");
+  return names.slice(0, -1).join(", ") + " and " + names[names.length - 1];
 }
 
 
@@ -245,7 +269,7 @@ function getIngredients(meal) {
 }
 
 // THE CALCULATION: compare one recipe with the user's inventory.
-function scoreRecipe(meal, inventory) {
+function scoreRecipe(meal, inventory, picks = []) {
   const ingredients = getIngredients(meal);
   const have = [];
   const missing = [];
@@ -269,14 +293,22 @@ function scoreRecipe(meal, inventory) {
 
   const tools = detectTools(meal);
 
-  return { meal, ingredients, have, missing, score, useSoonCount, tools };
+  // How many of the ingredients the user ticked does this recipe use?
+  const picksUsed = picks.filter(pick =>
+    ingredients.some(ingredient => namesMatch(pick, ingredient.name))
+  ).length;
+
+  return { meal, ingredients, have, missing, score, useSoonCount, tools, picksUsed };
 }
 
-// Highest score first. If two scores tie, the recipe that uses
-// more "use soon" food wins.
+// Highest score first. If two scores tie, the recipe that uses more of
+// your picked ingredients wins; if that ties too, more "use soon" food wins.
+// ( || means: "if the first difference is 0, use the next one" )
 function rankRecipes(scored) {
   return scored.sort((a, b) =>
-    b.score - a.score || b.useSoonCount - a.useSoonCount
+    b.score - a.score ||
+    b.picksUsed - a.picksUsed ||
+    b.useSoonCount - a.useSoonCount
   );
 }
 
@@ -382,7 +414,7 @@ function makeTagList(names, className, emptyText) {
 // We use textContent (never innerHTML) so text from the API
 // can't add unexpected HTML to the page.
 function createRecipeCard(result) {
-  const { meal, ingredients, have, missing, score, useSoonCount, tools } = result;
+  const { meal, ingredients, have, missing, score, useSoonCount, tools, picksUsed } = result;
 
   const card = document.createElement("article");
   card.className = "recipe-card";
@@ -421,6 +453,14 @@ function createRecipeCard(result) {
   title.textContent = meal.strMeal;
 
   body.append(meta, title);
+
+  // Only worth saying when more than one ingredient was picked.
+  if (lastPicks.length > 1) {
+    const picksLine = document.createElement("p");
+    picksLine.className = "recipe-meta";
+    picksLine.textContent = `USES ${picksUsed} OF YOUR ${lastPicks.length} PICKS`;
+    body.append(picksLine);
+  }
 
   if (useSoonCount > 0) {
     const badge = document.createElement("p");
@@ -499,7 +539,7 @@ function renderResults() {
   if (!lastMeals) return;
 
   const inventory = getUsableInventory();
-  const ranked = rankRecipes(lastMeals.map(meal => scoreRecipe(meal, inventory)));
+  const ranked = rankRecipes(lastMeals.map(meal => scoreRecipe(meal, inventory, lastPicks)));
 
   // "Use this tool": keep only recipes whose instructions mention it.
   const chosenTool = toolSelect.value;
@@ -513,7 +553,7 @@ function renderResults() {
   if (visible.length === 0) {
     showStatus(
       "empty",
-      `No ${lastIngredient} recipes mention ${withArticle(toolName(chosenTool)).toLowerCase()}`,
+      `No ${listText(lastPicks)} recipes mention ${withArticle(toolName(chosenTool)).toLowerCase()}`,
       `We checked ${ranked.length} recipes. Choose "Any tool" or another tool to see more.`
     );
     return;
@@ -525,7 +565,7 @@ function renderResults() {
   const note = document.createElement("p");
   note.className = "results-note";
   note.textContent =
-    `${visible.length} RECIPE${visible.length === 1 ? "" : "S"} WITH ${lastIngredient.toUpperCase()}` +
+    `${visible.length} RECIPE${visible.length === 1 ? "" : "S"} WITH ${listText(lastPicks).toUpperCase()}` +
     (chosenTool ? ` USING ${withArticle(toolName(chosenTool)).toUpperCase()}` : "") +
     ", BEST MATCH FIRST. MATCH % COMPARES INGREDIENT NAMES, NOT AMOUNTS.";
   results.append(note);
@@ -538,22 +578,50 @@ function renderResults() {
    5. WHEN THE USER CLICKS "FIND RECIPES"
 ----------------------------------------- */
 
-async function findRecipes(ingredientName) {
+// Search every picked ingredient and combine the answers.
+// Returns recipes ordered so the ones found by MORE picks come first.
+// Example: picks = Eggs, Spinach
+//   Eggs search    → Omelette, Quiche, Pancakes
+//   Spinach search → Omelette, Saag
+//   Omelette was found twice, so it goes first.
+async function searchAllPicks(picks) {
+  // One search per pick, all running at the same time.
+  const lists = await Promise.all(picks.map(searchByIngredient));
+
+  const timesFound = {};   // idMeal → how many searches found it
+  const combined = [];     // each recipe once, in the order first seen
+
+  lists.forEach(list => {
+    list.forEach(meal => {
+      if (!timesFound[meal.idMeal]) {
+        timesFound[meal.idMeal] = 0;
+        combined.push(meal);
+      }
+      timesFound[meal.idMeal]++;
+    });
+  });
+
+  return combined.sort((a, b) => timesFound[b.idMeal] - timesFound[a.idMeal]);
+}
+
+async function findRecipes(picks) {
   // LOADING STATE
   findButton.disabled = true;
   lastMeals = null;
   results.replaceChildren();
-  showStatus("loading", "Finding recipes…", `Looking for recipes that use ${ingredientName}.`);
+  showStatus("loading", "Finding recipes…", `Looking for recipes that use ${listText(picks)}.`);
 
   try {
-    const matches = await searchByIngredient(ingredientName);
+    const matches = await searchAllPicks(picks);
 
     // EMPTY STATE (no results)
     if (matches.length === 0) {
       showStatus(
         "empty",
-        `No recipes found for ${ingredientName}`,
-        "TheMealDB doesn't have recipes listed under this ingredient. Try another one from the list."
+        `No recipes found for ${listText(picks)}`,
+        "TheMealDB doesn't have recipes listed under " +
+        (picks.length > 1 ? "these ingredients" : "this ingredient") +
+        ". Try picking something else."
       );
       return;
     }
@@ -565,7 +633,7 @@ async function findRecipes(ingredientName) {
 
     // Remember these so tool/inventory changes can redraw them.
     lastMeals = meals.filter(meal => meal);        // skip any missing recipe
-    lastIngredient = ingredientName;
+    lastPicks = picks;
     renderResults();
 
   } catch (error) {
@@ -589,18 +657,24 @@ async function findRecipes(ingredientName) {
 form.addEventListener("submit", event => {
   event.preventDefault();   // stop the page from reloading
 
-  const ingredientName = select.value;
+  const picks = getPicks();
 
-  // INVALID INPUT STATE
-  if (!ingredientName) {
+  // INVALID INPUT STATE: nothing picked, or too many
+  if (picks.length === 0 || picks.length > MAX_PICKS) {
     lastMeals = null;
     results.replaceChildren();
-    showStatus("invalid", "Choose an ingredient first", "Pick something from your kitchen in the list, then press Find Recipes.");
-    select.focus();
+    showStatus(
+      "invalid",
+      picks.length === 0 ? "Choose an ingredient first" : `Pick up to ${MAX_PICKS} ingredients`,
+      picks.length === 0
+        ? "Tick at least one food from your kitchen, then press Find Recipes."
+        : `You picked ${picks.length}. Untick a few, then press Find Recipes.`
+    );
+    ingredientBoxes.querySelector("input")?.focus();
     return;
   }
 
-  findRecipes(ingredientName);
+  findRecipes(picks);
 });
 
 
@@ -613,11 +687,10 @@ form.addEventListener("submit", event => {
 // inventory changes in another tab, so the list is never out of date.
 function setUpIngredients() {
   const inventory = getUsableInventory();
-  const previous = select.value;
-
-  select.replaceChildren(new Option("Choose an ingredient", ""));
+  const previousPicks = getPicks();
 
   if (inventory.length === 0) {
+    ingredientBoxes.replaceChildren();
     // EMPTY STATE (no inventory)
     findButton.disabled = true;
     lastMeals = null;
@@ -632,18 +705,15 @@ function setUpIngredients() {
   }
 
   findButton.disabled = false;
-  fillDropdown(inventory);
 
-  // Keep the user's choice if that food is still in the kitchen.
-  if ([...select.options].some(option => option.value === previous && previous)) {
-    select.value = previous;
-  }
+  // Rebuild the pills, keeping ticks on food that's still in the kitchen.
+  fillIngredientChoices(inventory, previousPicks);
 
   if (lastMeals) {
     renderResults();   // re-score the recipes on screen with the new inventory
   } else {
     // EMPTY STATE (before searching)
-    showStatus("empty", "Ready when you are", "Pick an ingredient and press Find Recipes.");
+    showStatus("empty", "Ready when you are", "Pick one or more ingredients and press Find Recipes.");
   }
 }
 
