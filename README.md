@@ -54,9 +54,11 @@ For example, Spinach Omelette needs Eggs, Spinach, and Feta. You have 2 of the 3
 - Removed the empty Buy List, Customize, and About pages from the navigation.
 
 ## Where the Agent's Output Differed from My Expectations
-_TODO (Alisa): write this in your own words._
+TheMealDB doesn't have many creative ingredients, or recipes that are simple and good for lazy cooks. The agent also removed my Buy List, Customize, and About pages from the navigation because they were still empty. That's okay for now, and I'm going to work on those pages later.
 
 ## AI Reflection
 > *Pick one piece of AI output you did not accept as-is. What did it give you, what did you change, and how did you know it needed changing? Point at the commit.*
 
-_TODO (Alisa): answer truthfully from your own review of the commits._
+The AI first gave me a What Can I Make? page where I could only pick **one** ingredient ([8c451b2](https://github.com/alisabhrs/mini-project-3/commit/8c451b2)). I asked it to add kitchen tools, like a blender or air fryer, so I could choose which one to use ([5889e9d](https://github.com/alisabhrs/mini-project-3/commit/5889e9d)), and to let me pick more than one ingredient ([c3e80e0](https://github.com/alisabhrs/mini-project-3/commit/c3e80e0)).
+
+I knew it needed changing because I put myself in the user's position and thought about what I would want to be able to do if I were using it. Picking several ingredients and the tools I actually have is more convenient.
