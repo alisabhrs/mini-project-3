@@ -1,9 +1,0 @@
-<header class="site-header">
-    <nav class="sticker-nav" aria-label="Main navigation">
-      <a href="fill-fridge.html"><img src="images/fill-fridge-button.png" alt="Fill Fridge"></a>
-      <a href="fill-pantry.html"><img src="images/fill-pantry-button.png" alt="Fill Pantry"></a>
-      <a href="index.html" class="brand"><img src="images/freshd-logo.png" alt="Fresh'd Home"></a>
-      <a href="use-by.html"><img src="images/use-by-button.png" alt="Use By"></a>
-      <a href="what-can-i-make.html" class="nav-stamp" aria-current="page"><span>What can I <strong>make?</strong></span></a>
-    </nav>
-  </header>

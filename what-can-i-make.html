@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Can I Make? | Fresh'd</title>
+
+  <link rel="icon" href="images/freshd-logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/recipes.css">
+
+  <!-- Shared inventory: load FIRST -->
+  <script src="js/inventory.js" defer></script>
+  <!-- Recipe search and matching: load SECOND -->
+  <script src="js/recipes.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="sticker-nav" aria-label="Main navigation">
+      <a href="fill-fridge.html"><img src="images/fill-fridge-button.png" alt="Fill Fridge"></a>
+      <a href="fill-pantry.html"><img src="images/fill-pantry-button.png" alt="Fill Pantry"></a>
+      <a href="index.html" class="brand"><img src="images/freshd-logo.png" alt="Fresh'd Home"></a>
+      <a href="use-by.html"><img src="images/use-by-button.png" alt="Use By"></a>
+      <a href="what-can-i-make.html" class="nav-stamp" aria-current="page"><span>What can I <strong>make?</strong></span></a>
+    </nav>
+  </header>
+
+  <main class="recipes-page">
+
+    <section class="recipes-hero">
+      <div>
+        <p class="recipes-eyebrow">FRESH'D / COOK WHAT YOU HAVE</p>
+        <h1>WHAT CAN I <span>MAKE?</span></h1>
+        <p class="recipes-intro">
+          Pick something from your kitchen. Fresh'd finds real recipes that use it
+          and shows how much of each recipe you already have.
+        </p>
+      </div>
+
+      <!-- THE USER'S CHOICE -->
+      <div class="recipes-receipt">
+        <p class="receipt-brand">*** FRESH'D ***</p>
+        <h2>RECIPE<br>FINDER</h2>
+        <div class="receipt-rule"></div>
+
+        <form id="recipe-form" novalidate>
+          <label for="ingredient-select">01 / COOK WITH…</label>
+          <select id="ingredient-select">
+            <option value="">Choose an ingredient</option>
+          </select>
+          <p class="receipt-help">Food that expires soonest is listed first. Expired food is left out.</p>
+
+          <button type="submit" id="find-button" class="recipes-submit">FIND RECIPES ↗</button>
+        </form>
+
+        <div class="receipt-rule"></div>
+        <p class="receipt-help">
+          MATCH % = INGREDIENTS YOU HAVE ÷ INGREDIENTS IN THE RECIPE.
+          IT COMPARES NAMES ONLY, NOT AMOUNTS.
+        </p>
+        <p class="receipt-help">RECIPES FROM THEMEALDB.COM</p>
+      </div>
+    </section>
+
+    <!-- EMPTY / LOADING / ERROR / INVALID MESSAGES -->
+    <div id="recipe-status" class="recipe-status" role="status" aria-live="polite"></div>
+
+    <!-- IN-USE STATE: ranked recipe cards -->
+    <section aria-label="Recipe results">
+      <div id="recipe-results" class="recipe-results"></div>
+    </section>
+
+  </main>
+
+  <footer class="recipes-footer">FRESH'D © 2026 · YOUR FRIDGE, YOUR RULES.</footer>
+</body>
+</html>
