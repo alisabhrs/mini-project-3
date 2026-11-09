@@ -1,7 +1,5 @@
 # Fresh'd — Product Requirements Document (Mini Project 3)
 
-> Alisa: review and correct this before relying on it.
-
 ## 1. Project Goal
 Turn Fresh'd from a kitchen inventory tracker into an inventory **and** recipe discovery site. Using an ingredient the user already owns, Fresh'd fetches real recipes from TheMealDB and calculates how closely each one matches the user's inventory.
 
